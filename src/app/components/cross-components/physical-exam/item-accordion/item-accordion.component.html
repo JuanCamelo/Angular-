@@ -1,0 +1,42 @@
+<div [hidden]="!item.isVisible" class="white-container content-item" [id]="item.zonaExamenFisicoDescripcion">
+  <h3 class="mb-4 ">{{item.zonaExamenFisicoDescripcion}}</h3>
+
+  <div *ngFor="let data of item.itemExamenFisicoDTO" class="item-container">
+    <strong>{{data.itemExamenFisicoDescripcion}}</strong>
+    <div class="radio-buttons-form">
+      <ng-container *ngFor="let item of data.opcionesItemExamenFisicoDTO">
+        <div *ngIf="item.subOpcionesItemExamenFisicosDTO.length===0"
+          [ngClass]="{'description-box': item.capturaTextoOpcionesItemExamenFisico}">
+          <dx-check-box *ngIf="!item.capturaTextoOpcionesItemExamenFisico" [value]="false"
+            [text]="item.opcionesItemDescripcion"
+            (valueChange)="onCheckValueChange(item, false, data.zonaExamenFisicoIdHead, $event)" #descripcion>
+          </dx-check-box>
+
+          <!-- <dx-text-area hidden= "true" *ngIf="item.capturaTextoOpcionesItemExamenFisico" [(value)]="data.descripcion" [minHeight]="70"
+            [placeholder]="item.opcionesItemDescripcion" (onValueChanged)="onDescriptionChanged($event, item)" #descripcion>
+          </dx-text-area> -->
+
+        </div>
+
+        <div *ngIf="item.subOpcionesItemExamenFisicosDTO.length>0" class="checkbox-content">
+          <dx-check-box *ngFor="let item of item.subOpcionesItemExamenFisicosDTO" [value]="false"
+            [text]="item.subOpcionesItemExamenFisicosDTO"
+            (valueChange)="onCheckValueChange(item, true, data.zonaExamenFisicoIdHead, $event)">
+          </dx-check-box>
+        </div>
+      </ng-container>
+
+    </div>
+
+  </div>
+  <div class="item-container">
+    <strong>Descripción</strong>
+    <div class="radio-buttons-form-Description">
+      <dx-text-area 
+        placeholder="Descripcion" 
+        [(value)]="textbox"
+        (valueChange)="onValueChangedDescription($event)"
+        ></dx-text-area>
+    </div>
+  </div>
+</div>

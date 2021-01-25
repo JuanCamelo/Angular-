@@ -1,0 +1,15 @@
+<div class="pageContainer-top">
+  <!-- BreadCrumbs -->
+  <div class="pageContainer-breadCrumbsContainer" [hidden]="selfmanagement">
+
+    <div *ngIf="showHome" class="pageContainer-breadCrumb">
+      <a [routerLink]="'/home'" routerLinkActive="link-active">Home</a>
+      <i class="fas fa-chevron-right"></i>
+    </div>
+
+    <div *ngFor="let breadCrumb of urlBreadCumsList; let i=index" class="pageContainer-breadCrumb">
+      <a [routerLink]="breadCrumb.path" routerLinkActive="link-active">{{ breadCrumb.name }}</a>
+      <i *ngIf="i<urlBreadCumsList.length-1" class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</div>

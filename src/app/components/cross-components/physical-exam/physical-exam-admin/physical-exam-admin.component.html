@@ -1,0 +1,12 @@
+<h5 class="title"><span>Examen Fisico</span> </h5>
+<div class="header-content">
+  <ul class="buttons-content mt-2">
+    <li *ngFor="let item of physicalExams; index as i" [ngClass]="{'active': item.isVisible}" (click)="itemClick(i)">
+      <a>{{item.text}}</a>
+    </li>
+  </ul>
+  <div class="accordion">
+    <oph-item-accordion *ngFor="let item of physicalExams" [item]="item" (onValueChange)="onValueChange($event)">
+    </oph-item-accordion>
+  </div>
+</div>

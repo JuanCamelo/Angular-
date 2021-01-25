@@ -1,0 +1,36 @@
+{
+    "popUpShowNotifyMessage.title.success": "Mensaje exitoso",
+    "popUpShowNotifyMessage.title.error": "Mensaje de error",
+    "popUpShowNotifyMessage.title.info": "Mensaje informativo",
+    "popUpShowNotifyMessage.title.warning": "Mensaje de advertencia",
+
+    "patientIdentityValidation.warning.mainMessage": "El paciente no se encuentra dentro de la base maestra de pacientes.",
+    "patientIdentityValidation.warning.message": "¿Desea crear el paciente en el sistema?",
+
+    "patientIdentityValidation.validation.title": "Validación de Derechos",
+    "patientIdentityValidation.validation.mainMessage": "Por favor valide la cobertura del paciente",
+    "patientIdentityValidation.validation.message": "¿El paciente cuenta con cobertura administrativa?",
+
+    "patientIdentityCreate.validation.mainMessage": "El paciente no se encuentra en la base de datos de la institución",
+    "patientIdentityCreate.validation.message": "¿Desea crear el paciente?",
+
+    "cancelAppointmentProgramate.title": "La cita que desea cancelar se encuentra fuera del tiempo limite para su cancelacion, si desea cancelarla se generara multa.",
+    "cancelAppointment.message.confirm": "¿Desea continuar con la cancelación?",
+    "cancelAppointment.message.motive.confirm": "Confirme el motivo de la cancelación de la solicitud",
+
+
+    "individualAppointments.validation.title": "",
+    "individualAppointments.validation.mainMessage": "No se encontraron citas disponibles de acuerdo a los criterios de búsqueda ingresados.",
+    "individualAppointments.validation.message": "Seleccione la acción que deseas realizar.",
+
+    "individualAppointments.validation.mainMessageWaitingList": "Confirme la siguiente información para adicionar a la lista de espera.",
+
+    "particularAppointments.message.successAppointmentGet": "Se encontraron {{ appointments }} citas para los siguientes profesionales:\n {{ professional }}.",
+    "particularAppointments.message.validateMedicalBoardProfessionals": "Debe ingresar al menos 2 profesionales para programar una junta médica",
+
+    "confirm.waiting.message.saveAppointment": "Cita guardada en lista espera.",
+    "confirm.waiting.message.validateProcedure": "Debe seleccionar un Procedimiento o Actividad",
+    "confirm.waiting.message.validateAppoimentType": "Debe seleccionar un tipo de cita",
+    "confirm.waiting.message.validateProgram": "Debe seleccionar una Especialidad o Programa"
+
+}

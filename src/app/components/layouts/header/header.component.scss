@@ -1,0 +1,36 @@
+header {
+  padding: 0 3em;
+  background: rgb(60, 121, 138);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 50px;
+  max-height: 65px;
+  overflow: hidden;
+
+  .buttons_container {
+    display: flex;
+    align-items: center;
+    * {
+      display: flex;
+      margin-right: 0.5em;
+    }
+  }
+
+  .image_container {
+    margin: auto;
+    width: 90px;
+    margin: auto;
+    img {
+      width: 100%;
+    }
+  }
+  .tools {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    * {
+      display: flex;
+      margin-left: 0.5em;
+    }
+  }
+}

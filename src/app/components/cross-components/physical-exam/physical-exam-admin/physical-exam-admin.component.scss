@@ -1,0 +1,201 @@
+.header-content {
+  display: grid;
+  grid-template-columns: 150px repeat(3, 1fr);
+  grid-auto-rows: minmax(auto, auto);
+  position: relative;
+}
+
+.buttons-content {
+  position: sticky;
+  top: 70px;
+  background: white;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-auto-flow: row;
+  font-weight: 400;
+  line-height: 2.1;
+  margin-left: 1em;
+  li {
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: center;
+    a {
+      text-decoration: none;
+    }
+    &.active {
+      border-bottom: 2px solid #4a85bc;
+      color: #4a85bc;
+      font-weight: 600;
+    }
+  }
+}
+
+.accordion {
+  grid-column: 2 / 5;
+  grid-row: 1 / 7;
+}
+
+.title {
+  background: #4a85bc;
+  grid-column: 1 / 5;
+  grid-row: 1;
+  padding: 0.5em;
+  color: #fff;  
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+
+.dx-accordion-item-body {
+  padding: 0px;
+  font-size: 14px;
+}
+
+.dx-form .dx-texteditor-input {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.item-default {
+  height: 250px;
+  color: white;
+  background: gray;
+}
+
+.dx-accordion-item-title {
+  background-color: var(--sideBarMain);
+  color: #ffffff;
+  font-weight: bold;
+  .dx-accordion-item-opened > .dx-accordion-item-title {
+    background-color: var(--sideBarMain);
+  }
+}
+
+.dx-accordion-item-title:before {
+  color: #ffffff;
+}
+
+.dx-accordion-item-title:hover,
+.dx-accordion-item-title:active {
+  background-color: var(--sideBarMain) !important;
+  color: #ffffff !important;
+  font-weight: bold;
+  .dx-accordion {
+    background-color: #ffffff;
+  }
+}
+
+.dx-accordion-item-title:first-child {
+  background-color: var(--sideBarMain);
+}
+
+.dashboard-container {
+  border: none;
+  background: rgb(0 0 0 / 0.1);
+  padding: 0.05em 0.05em;
+  height: 90vh;
+  min-height: 570px;
+  display: grid;
+  row-gap: 0.05em;
+  column-gap: 0.05em;
+  grid-template-columns: 29% 27% 44%;
+  grid-template-rows: 140px 255px 145px;
+  grid-template-areas: "itemA itemF itemC" "itemD itemB itemB" "itemG itemB itemB" "itemE itemE itemE";
+}
+
+.item-a {
+  grid-area: itemA;
+}
+
+.item-b {
+  grid-area: itemB;
+}
+
+.item-c {
+  grid-area: itemC;
+}
+
+.item-d {
+  grid-area: itemD;
+}
+
+.item-e {
+  grid-area: itemE;
+}
+
+.item-f {
+  grid-area: itemF;
+}
+
+.item-g {
+  grid-area: itemG;
+}
+
+.item-a-a {
+  display: flex;
+  align-items: initial;
+  // justify-content: center;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.alert-item {
+  width: 100%;
+}
+
+.grid-content {
+  background: white;
+  padding: 0.7em 0.6em;
+  border-radius: 4px;
+  border: 1px solid #dadada;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+/* container properties */
+
+.scrollbar {
+  width: 100%;
+  max-width: 100%;
+  height: 400px;
+  background-color: #7bd6fc;
+  overflow-y: scroll;
+}
+
+/* customize scrollbar css */
+
+::-webkit-scrollbar {
+  width: 4px;
+  background-color: #fbfbfb;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  // border: 1px #787878 solid;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 6px #c8c8c8 inset;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #b3b3b3;
+  // border: 0.7px solid #000000;
+  border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #9e9a9a;
+  // border: 1px solid #333333;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #adadad;
+  // border: 1px solid #333333;
+}

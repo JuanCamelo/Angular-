@@ -1,0 +1,46 @@
+.oph-round-button{
+  border-radius: 50%;
+  text-align: center;
+  font-size: 15px;
+  height: 30px;
+  width: 30px;
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+i {
+  display:inline-block;
+  vertical-align:middle;
+  max-width:90%;
+}
+
+.oph-round-button-tooltip{
+  /*max-width: 180%;*/
+  max-width: 120px;
+  color: #111;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  bottom: 105%;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  width: max-content;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 0.8em;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.oph-round-button:hover~.oph-round-button-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+

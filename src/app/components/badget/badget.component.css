@@ -1,0 +1,14 @@
+.badget-container {
+    display: flex;
+    justify-content: center;
+}
+.badget {
+    text-align: center;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+}
+
+.labelState {
+    vertical-align: middle;
+}

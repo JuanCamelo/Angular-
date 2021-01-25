@@ -1,0 +1,28 @@
+.content-horizontal {
+    display: flex;
+}
+
+.box {
+    text-align: left;
+    margin-left: 5%;
+    width: 35%;
+    padding: 0px;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.button-item{
+    margin: 0.5rem 0 0.5rem 1rem;
+    align-self: flex-end;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.width-100-per{
+    width: 100%;
+}

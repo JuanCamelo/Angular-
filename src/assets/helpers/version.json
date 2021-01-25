@@ -1,0 +1,14 @@
+[{
+    "version": "v1.1.1",
+    "date": "Dic 28, 2020",
+    "release": "A continuación se enumerarán todos los bugs corregidos y nuevas característica incluidas:",
+    "newfeature": [
+        "Se muestra el tiempo de las Juntas Médicas basado en la duración del procedimiento.",
+        "Al reprogramar una cita se cancela con motivo: 'Reprogramada' y se crea una con los nuevos valores.",
+        "Se fijan los colores por número de profesionales -Ya no se generan aleatoriamente-."
+    ],
+    "bugs": [
+        "Corrección en la visualización de agendas disponibles para citas programadas con la misma hora en Junta Médica.",
+        "Se visualizan las citas programadas organizadas en cada columna por profesional"
+    ]
+}]

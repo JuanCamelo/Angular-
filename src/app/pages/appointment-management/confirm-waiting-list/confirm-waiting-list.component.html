@@ -1,0 +1,57 @@
+<div style="text-align: center">
+    <div class="">
+        <img src="./assets/images/iconoAlerta.png" class="dialog-img">
+        <p>{{'individualAppointments.validation.mainMessageWaitingList' | translate }}</p>
+        <div class="content-horizontal">
+            <div class="box">
+                <h6><strong>Tipo de documento</strong></h6>
+                <p>{{objectWaitingList.tipoDocumento}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Número de documento</strong></h6>
+                <p>{{objectWaitingList.numeroDocumento}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Tipo de cita</strong></h6>
+                <p>{{objectWaitingList.tipoCita}}</p>
+            </div>
+        </div>
+        <div class="content-horizontal">
+            <div class="box" *ngIf="dataForm.program === ''">
+                <h6><strong>Especialidad</strong></h6>
+                <p>{{objectWaitingList.especialidad}}</p>
+            </div>
+            <div class="box" *ngIf="dataForm.program !== ''">
+                <h6><strong>Programa</strong></h6>
+                <p>{{objectWaitingList.programa}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Teléfono</strong></h6>
+                <p>{{objectWaitingList.telefono}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Fecha deseada</strong></h6>
+                <dx-date-box [(value)]="date" type="datetime" [min]="minDate">
+                </dx-date-box>
+            </div>
+        </div>
+        <div class="content-horizontal mt-2">
+            <div class="width-100-per" *ngIf="dataForm.activity === ''">
+                <h6><strong>Procedimiento<ng-container *ngIf="dataForm.appointmentTypeCode !== appointmentTypesEnum.MEDICALBOARD && dataForm.procedureMedic.split(',').length > 1">s</ng-container>
+                </strong></h6>
+                <p style="white-space: pre-line" class="text-left">{{dataForm.appointmentTypeCode !== appointmentTypesEnum.MEDICALBOARD ? dataForm.procedure : dataForm.procedure.split("\n")[0]}}</p>
+            </div>
+            <div class="width-100-per" *ngIf="dataForm.activity !== ''">
+                <h6><strong>Actividad</strong></h6>
+                <p class="text-left">{{objectWaitingList.actividad}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="buttonContainer">
+        <dx-button stylingMode="contained" text="Guardar" type="success" class="button-item" icon="fas fa-save" [width]="120" (onClick)="onClick(true)">
+        </dx-button>
+        <dx-button stylingMode="contained" text="Salir" type="danger" [width]="120" class="button-item" icon="fas fa-times" (onClick)="onClick(false)">
+        </dx-button>
+    </div>
+</div>
+<br>

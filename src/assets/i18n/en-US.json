@@ -1,0 +1,6 @@
+{
+  "popUpShowNotifyMessage.title.success": "Success message",
+  "popUpShowNotifyMessage.title.error": "Error message",
+  "popUpShowNotifyMessage.title.info": "Informative message",
+  "popUpShowNotifyMessage.title.warning": "Warning message"
+}

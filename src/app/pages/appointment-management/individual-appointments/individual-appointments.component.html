@@ -1,0 +1,175 @@
+<oph-info-patient-top></oph-info-patient-top>
+
+<div class="gray-container" *ngIf="showScheduledAppointment">
+    <h4>PROGRAMACIÓN ACTUAL</h4>
+    <div class="content-horizontal">
+        <div class="box">
+            <h6><strong>Fecha</strong></h6>
+            <p>{{scheduledAppointment?.fechaDTO | date:'dd-MM-yyyy'}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Hora</strong></h6>
+            <p>{{scheduledAppointment?.horaDTO}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Sede</strong></h6>
+            <p>{{scheduledAppointment?.sedeDTO}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Consultorio</strong></h6>
+            <p>{{scheduledAppointment?.consultorioDTO}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Tipo de cita</strong></h6>
+            <p>{{scheduledAppointment?.tipoCItaDTO}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Especialidad</strong></h6>
+            <p>{{scheduledAppointment?.especialidadDTO}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Procedimiento</strong></h6>
+            <p>{{scheduledAppointment?.procedimientoDTO}}</p>
+        </div>
+        <div class="box">
+            <h6><strong>Profesional</strong></h6>
+            <p>{{scheduledAppointment?.profesionalDTO}}</p>
+        </div>
+    </div>
+</div>
+
+<form class="gray-container">
+    <dx-form #form id="form" [formData]="dataForm" showColonAfterLabel="true" labelLocation="top">
+        <dxi-item itemType="group" caption="" [colCount]="3">
+            <dxi-item editorType="dxSelectBox" [label]="{text:'Tipo de cita'}" dataField="idTipoCita" [colSpan]="1" [editorOptions]="{ dataSource: appointmentTypeList,  
+                displayExpr: 'descripcionDTO',  
+                valueExpr: 'idDTO',
+                showClearButton: true,
+                disabled: disableFields,
+                onSelectionChanged: onAppointmentTypeChange
+            }">
+                <dxi-validation-rule type="required" message="Campo requerido">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item editorType="dxSelectBox" [label]="{text:'Especialidad'}" dataField="specialty" [colSpan]="1" [editorOptions]="{ dataSource: specialtyList,  
+                displayExpr: 'descripcionDTO',  
+                valueExpr: 'idDTO',
+                disabled: disableFields,
+                showClearButton: true,
+                onSelectionChanged: onSpecialityChange }">
+                <dxi-validation-rule type="required" message="Campo requerido">
+                </dxi-validation-rule>
+            </dxi-item>
+            <!-- value: specialtyList[indexSpecialty]?.idDTO, -->
+            <dxi-item dataField="process" editorType="dxLookup" [label]="{text:'Procedimiento'}" [colSpan]="1" [editorOptions]="{  
+                dataSource: procedureList,
+                displayExpr: 'descripcionDTO',
+                valueExpr: 'idDTO',
+                searchMode:'contains',
+                searchExpr: ['descripcionDTO'],
+                wrapItemText: true,
+                pageLoadMode: null,
+                closeOnOutsideClick: true,
+                disabled: disableFields,
+                onValueChanged: onProcedureChange
+                }">
+                <!-- value:procedureList[indexProcess]?.idDTO, -->
+                <dxi-validation-rule type="required" message="Campo requerido">
+                </dxi-validation-rule>
+            </dxi-item>
+            <dxi-item editorType="dxSelectBox" [label]="{text:'Profesional'}" dataField="professional" [colSpan]="1" [editorOptions]="editorOptionsProfessional">
+            </dxi-item>
+            <dxi-item editorType="dxSelectBox" [label]="{text:'Sede'}" dataField="campus" [colSpan]="1" [editorOptions]="{ dataSource: campusList,   
+                displayExpr: 'descriptionDTO',  
+                valueExpr: 'idDTO',
+                showClearButton: true }">
+            </dxi-item>
+            <dxi-item dataField="date" [label]="{text:'Fecha'}" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ min:minDate }">
+            </dxi-item>
+            <dxi-item [colSpan]="2"></dxi-item>
+            <dxi-item itemType="button" [buttonOptions]="buttonOptions" verticalAlignment="bottom" [colSpan]="1">
+            </dxi-item>
+
+        </dxi-item>
+    </dx-form>
+</form>
+
+<dx-data-grid [dataSource]="gridData" [showBorders]="true" [showRowLines]="true" [hoverStateEnabled]="true" keyExpr="id" [focusedRowEnabled]="true" [(autoNavigateToFocusedRow)]="autoNavigateToFocusedRow" (onFocusedRowChanging)="onFocusedRowChanging($event)"
+    (onRowClick)="onFocusedRowChanged($event.data)">
+    <dxo-paging [pageSize]="5"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10]"></dxo-pager>
+
+    <dxi-column caption="Fecha" dataField="fecha" dataType="date" alignment="center"></dxi-column>
+    <dxi-column caption="Hora" dataField="hora" alignment="center"></dxi-column>
+    <dxi-column caption="Sede" dataField="sede" alignment="center"></dxi-column>
+    <dxi-column caption="Consultorio" dataField="consultorio" alignment="center"></dxi-column>
+    <dxi-column caption="Especialidad" dataField="especialidad" alignment="center"></dxi-column>
+    <dxi-column caption="Profesional" dataField="profesional" alignment="center"></dxi-column>
+
+</dx-data-grid>
+
+
+
+<dx-popup [showTitle]="true" [title]="'Seleccione confirmar si estas de acuerdo con los datos'" shadingColor="rgba(0, 0, 0, 0.55)" [dragEnabled]="true" [closeOnOutsideClick]="true" [(visible)]="popupVisible" [width]="'40%'" [height]="'auto'" [maxHeight]="'auto'"
+    [resizeEnabled]="true" [fullScreen]="FullScreen">
+    <div *dxTemplate="let data of 'content'">
+        <div class="content-horizontal">
+            <div class="box">
+                <h6><strong>Fecha y hora</strong></h6>
+                <p>{{newScheduledAppointment.fecha + " "+ newScheduledAppointment.hora}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Sede</strong></h6>
+                <p>{{newScheduledAppointment.sede}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Tipo de cita</strong></h6>
+                <p>{{newScheduledAppointment.tipoCita}}</p>
+            </div>
+        </div>
+        <div class="content-horizontal">
+
+            <div class="box">
+                <h6><strong>Especialidad</strong></h6>
+                <p>{{newScheduledAppointment.especialidad}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Procedimiento</strong></h6>
+                <p>{{newScheduledAppointment.procedimiento}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Consultorio</strong></h6>
+                <p>{{newScheduledAppointment.consultorio}}</p>
+            </div>
+        </div>
+        <div class="content-horizontal">
+            <div class="box">
+                <h6><strong>Profesional</strong></h6>
+                <p>{{newScheduledAppointment.profesional}}</p>
+            </div>
+            <div class="box">
+                <h6><strong>Recomendaciones</strong></h6>
+                <p>{{newScheduledAppointment.recomendaciones}}</p>
+            </div>
+            <div class="box">
+
+            </div>
+        </div>
+        <div class="content-horizontal">
+            <div class="buttons">
+                <dx-button stylingMode="contained" text="Salir" type="danger" [width]="120" class="btnFloatRight" icon="fas fa-times" (onClick)="click($event)">
+                </dx-button>
+                <dx-button stylingMode="contained" text="Confirmar" type="success" class="btnFloatRight" icon="fas fa-check" [width]="140" (onClick)="saveAppointment($event)">
+                </dx-button>
+            </div>
+        </div>
+
+
+    </div>
+</dx-popup>
+
+<dx-popup [showTitle]="false" [dragEnabled]="true" [closeOnOutsideClick]="true" [(visible)]="popupVisibleWaitingList" [width]="'43%'" [height]="'auto'" [maxHeight]="'auto'" [resizeEnabled]="true" [fullScreen]="FullScreen">
+    <div *dxTemplate="let data of 'content'">
+        <oph-confirm-waiting-list [objectWaitingList]="objectWaitingList" [dataForm]="dataFrm" (onResult)="onResult($event)"></oph-confirm-waiting-list>
+    </div>
+</dx-popup>

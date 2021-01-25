@@ -1,0 +1,83 @@
+.pageContainer-container {
+  padding: 0 3em 0.5em;
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.pageContainer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1em 0 1.4em 0;
+  h4 {
+    font-weight: bold;
+  }
+}
+
+.pageContainer-breadCrumbsContainer {
+  display: flex;
+}
+
+.pageContainer-breadCrumb {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  a {
+    font-weight: bold;
+    color: gray;
+    // text-decoration: none;
+  }
+  a:last-child {
+    color: #7fc2f5;
+    text-decoration: underline;
+  }
+
+  i {
+    margin: 0 0.5em;
+  }
+}
+
+/* Parte derecha de titulo */
+.pageContainer-title {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pageContainer-title h1,
+h2,
+h3,
+h4,
+h5 {
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.pageContainer-title-icon-container {
+  display: flex;
+  height: 2em;
+  width: auto;
+  align-items: center;
+  margin-left: 0.3em;
+}
+
+.pageContainer-title-icon-left {
+  color: var(--lightBlue);
+}
+
+.pageContainer-title-icon-right-container {
+  color: white;
+  background-color: var(--lightBlue);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2em;
+  border-radius: 5px;
+}
+
+.pageContainer-title-icon-right-container i {
+  font-size: 1.4em;
+}

@@ -1,0 +1,62 @@
+<div class="sideBar-container">
+  <!-- Contenedor izquiero (Parte principal de menu lateral) -->
+  <div [ngClass]="
+      [
+        'sideBar-left',
+        isSideBarCollapsed ? 'sideBar-left-collapsed' : 'sideBar-left-shown'
+      ].join(' ')
+    ">
+    <!-- Imagen -->
+    <div class="sideBar-image-container">
+      <!-- Ícono editar -->
+      <div class="sidebar-edit-container">
+        <i routerLink="/information-patient" class="fas fa-cog"></i>
+      </div>
+      <div class="sideBar-image"></div>
+    </div>
+
+    <h5>Dra. Sofia Garzon Sanchez</h5>
+
+    <!-- Parte inferior de contenedor izquierdo -->
+    <div class="sideBar-left-buttom-container">
+      <!-- Selección Tipo -->
+      <div class="sideBar-searchContainer">
+        <div class="sideBar-dxSelectBox">
+          <!-- <dx-select-box [dataSource]="hardodedObjects" displayExpr="name" valueExpr="id"
+            [value]="hardodedObjects[0].id">
+          </dx-select-box> -->
+        </div>
+
+        <!-- Accordion -->
+        <!-- <dx-accordion [dataSource]="navigation" [collapsible]="true" [multiple]="false" [animationDuration]="300"
+          [selectedItems]="[navigation[0]]" [width]="250">
+          <div *dxTemplate="let navigationItem of 'title'">
+            <span>{{ navigationItem.text }}</span>
+          </div>
+          <div id="content" class="dx-theme-background-color">
+            <div *dxTemplate="let navigationItem of 'item'">
+            </div>
+          </div>
+        </dx-accordion> -->
+      </div>
+
+      <!-- Icono compañía -->
+      <div class="sideBar-company-logo">
+        <img src="./assets/images/klinic-logo.png" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor derecho (parte con iconos) -->
+  <div class="sideBar-right">
+    <!-- Icono flecha -->
+    <i (click)="onCollapseIconClicked()" [ngClass]="
+        [
+          'sidebar-right-icon',
+          isSideBarCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left'
+        ].join(' ')
+      "></i>
+    <!-- Icono casa -->
+    <i routerLink="/process-manager" class="sidebar-right-icon fas fa-home"></i>
+  </div>
+</div>

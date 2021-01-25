@@ -1,0 +1,22 @@
+<dx-popup [width]="400" [height]="400" [showTitle]="true" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="isVisiblePopup" (onHiding)="onHiding()">
+
+    <div class="styleIcon">
+        <oph-round-button className="fas fa-exclamation" tooltip="INFORMACIÓN" background="#d82d2d" size="72">
+        </oph-round-button>
+        <br>
+        <span>{{messageInformation}}</span>
+        <hr>     
+        <dx-radio-group
+                    [items]="groupsReason"
+                    [value]="groupsReason[0]">
+                </dx-radio-group>
+    </div>
+    <br>
+    <div class="button-container">
+        <dx-button id="btnSave" text="Grabar" stylingMode="contained" type="success" [width]="120"
+                [useSubmitBehavior]="true" class="styleButton" (onClick)="executeAction()" >
+            </dx-button>
+    </div>
+
+</dx-popup>

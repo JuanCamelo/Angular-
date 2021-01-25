@@ -1,0 +1,128 @@
+<dx-accordion #accordion1 [dataSource]="accordionItems" [collapsible]="true" [multiple]="true"
+    [animationDuration]="300">
+    <div *dxTemplate="let novelty of 'title'">
+        <span>{{titles[0]}}</span>
+    </div>
+    <div *dxTemplate="let novelty of 'item'">
+        <div class="form-container">
+            <form (submit)="addDiagnosis($event)">
+                <dx-form id="form" [formData]="dataForm" showColonAfterLabel="true" labelLocation="top"
+                    minColWidth="300" #form>
+                    <dxi-item itemType="group" alignment="bottom">
+                    </dxi-item>
+                    <dxi-item itemType="group" alignment="bottom" [colCount]="9">
+
+                        <dxi-item itemType="group" alignment="bottom" [colSpan]="8">
+                            <div>
+                                <b class="helper-title">Ayudas Rápidas</b>
+                                <div style="display: flex;">
+                                    <dx-check-box *ngFor="let helper of helpersList" class="checkbox-helper"
+                                        [value]="false" [text]="helper.Name">
+                                    </dx-check-box>
+                                </div>
+                            </div>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" alignment="bottom" [colSpan]="1">
+                            <div class="circulo">
+                                <a [href]="URLDiagnosis" target="_blank">
+                                    <img id="product7" class="img-link" src="./assets/images/File-Serarch.png"
+                                        (mouseenter)="toggleWithAnimationOne()" (mouseleave)="toggleWithAnimationOne()">
+                                </a>
+                                <dx-tooltip target="#product7" position="top" [(visible)]="withAnimationVisibleOne"
+                                    [closeOnOutsideClick]="false">
+                                    <dxo-animation>
+                                        <dxo-show type="slide" [from]="{ top: -100, opacity: 0 }"
+                                            [to]="{ opacity: 1, top: 0 }"></dxo-show>
+                                        <dxo-hide type="pop" [from]="{ scale: 1, opacity: 1 }"
+                                            [to]="{ opacity: 0, scale: 0.1 }"></dxo-hide>
+                                    </dxo-animation>
+                                    <div *dxTemplate="let data of 'content'">
+                                        Consultar guías cientificas
+                                    </div>
+                                </dx-tooltip>
+                            </div>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" alignment="bottom" [colSpan]="9">
+                            <span class="search-input-label">Busqueda por código o descripción:</span>
+                            <dx-select-box #selectbox [dataSource]="diagnosisList[0]" displayExpr="descripcionDTO"
+                                valueExpr="idDTO" searchEnabled="true"
+                                placeholder="Escriba al menos 3 letras para filtrar..."
+                                (onKeyUp)="onFilterKeyUp($event)" (onSelectionChanged)="selectDiagnosis($event)">
+                                <div *dxTemplate="let data of 'item'">
+                                    <div style="display:inline-block">{{data.codigo}} - {{data.descripcionDTO}}</div>
+                                </div>
+                                <dxi-validation-rule type="required"></dxi-validation-rule>
+                            </dx-select-box>
+                        </dxi-item>
+
+                        <dxi-item editorType="dxRadioGroup" [colSpan]="2" [label]="{text:'Diagnóstico'}"
+                            dataField="DiagnosticoPrincipal"
+                            [editorOptions]="{ items: diagnosisCheckBoxes, displayExpr:'text', valueExpr:'value' }">
+                            <!-- <dxi-validation-rule type="required"></dxi-validation-rule> -->
+                        </dxi-item>
+
+                        <dxi-item dataField="TipoDiagRegistroMedico" editorType="dxSelectBox" [colSpan]="7"
+                            [label]="{text:'Tipo de Diagnóstico'}"
+                            [editorOptions]="{ dataSource: diagnosisTypeList, displayExpr: 'descripcionDTO'}">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-item>
+
+                        <dxi-item editorType="dxSwitch" [colSpan]="2" [label]="{text:'Inscribir Programa PYD'}"
+                            dataField="InscribirPrograma" [editorOptions]="{ 
+                            switchedOffText: 'No',
+                            switchedOnText: 'Sí',
+                            onValueChanged: switchValueChanged
+                        }">
+                        </dxi-item>
+
+                        <dxi-item dataField="Programa" [colSpan]="7" editorType="dxSelectBox"
+                            [label]="{text:'Elegir Programa'}" [editorOptions]="{ dataSource: programList,  
+                        disabled: !dataForm.InscribirPrograma,
+                        displayExpr: 'descripcionDTO' }">
+                        </dxi-item>
+
+                        <dxi-item editorType="dxTextArea" [colSpan]="9" [height]="400"
+                            [label]="{text:'Observaciones y Especificaciones'}" dataField="ObservacionEspecificacion"
+                            [editorOptions]="{height: 130, buttons: descriptionButton}">
+                            <dxi-validation-rule type="required"></dxi-validation-rule>
+                        </dxi-item>
+
+                        <dxi-item itemType="group" alignment="bottom" [colSpan]="7">
+
+                        </dxi-item>
+
+                        <dxi-item [colSpan]="2" itemType="button" style="padding-top: 10px" [buttonOptions]="{
+                    text: 'Agregar',
+                    type: 'success',
+                    useSubmitBehavior: true,
+                    width:'100%'}" verticalAlignment="bottom">
+                        </dxi-item>
+
+                    </dxi-item>
+
+                </dx-form>
+            </form>
+        </div>
+        <hr>
+        <dx-data-grid (onRowRemoved)="onRowRemoved($event)" [dataSource]="gridData" [showBorders]="true"
+            [showRowLines]="true" [hoverStateEnabled]="true">
+            <dxo-paging [pageSize]="12"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[8, 12, 20]"></dxo-pager>
+
+
+            <dxi-column caption="Código" dataField="Diagnostico.codigo" alignment="center"></dxi-column>
+            <dxi-column caption="Descripción" dataField="Diagnostico.descripcionDTO" alignment="center"></dxi-column>
+            <dxi-column caption="Tipo de Diagnóstico" dataField="TipoDiagRegistroMedico.descripcionDTO"
+                alignment="center"></dxi-column>
+            <dxi-column caption="Programa PYD" dataField="Programa.descripcionDTO" alignment="center"></dxi-column>
+            <dxi-column caption="Programa Inscrito" dataField="InscribirPrograma" alignment="center"></dxi-column>
+            <dxi-column caption="Observaciones y Especificaciones" dataField="ObservacionEspecificacion"
+                alignment="center"></dxi-column>
+            <dxo-editing [allowDeleting]="true" [texts]="{confirmDeleteMessage:'¿Desea eliminar el Diagnóstico?'}"
+                useIcons="true"></dxo-editing>
+        </dx-data-grid>
+
+    </div>
+</dx-accordion>

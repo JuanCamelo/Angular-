@@ -1,0 +1,59 @@
+.team {
+  // min-width: 255px;
+  background-color: white;
+  box-shadow: 0px 0px 3px #adadad;
+  transition: transform ease-out 0.1s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  &-header {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    background-color: #3578ff;
+    position: relative;
+    color: white;
+
+    a {
+      color: white;
+      font-size: 18px;
+    }
+  }
+
+  &-icon {
+    font-size: 1.4em;
+    position: absolute;
+    margin: 0 auto;
+    left: 50%;
+    top: 28%;
+    transform: translate(-50%, -2%);
+    background-color: #fff;
+    // border: 2px solid white;
+    border: 2px solid;
+    color: black;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 2;
+    box-shadow: 0px 0px 6px #e2e2e2;
+    display: flex;
+    i {
+      margin: auto;
+    }
+  }
+
+  &-body {
+    padding: 30px 20px 20px;
+    text-align: center;
+    font-size: 20px;
+
+    p {
+      margin: 0;
+    }
+  }
+}

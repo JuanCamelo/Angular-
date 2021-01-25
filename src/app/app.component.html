@@ -1,0 +1,13 @@
+<router-outlet></router-outlet>
+<oph-loader *ngIf="showLoader"></oph-loader>
+
+<dx-popup *ngIf="showPopup" class="popup" [height]="sharedService.popupHeight" [width]="750" [height]="'auto'" [maxWidth]="'90vw'" [showTitle]="true" [title]="notificationTitle" [dragEnabled]="true" [closeOnOutsideClick]="true" [(visible)]="showPopup">
+    <div *dxTemplate="let data of 'title'" [style.background-color]="notificationTitleBackgrounColor" style="color: '#ffffff'; font-size: 20px;">
+        {{notificationTitle}}
+    </div>
+    <div *dxTemplate="let data of 'content'">
+        <dx-list [hoverStateEnabled]="false" [activeStateEnabled]="false" [focusStateEnabled]="false" showScrollbar="always">
+            <dxi-item *ngFor="let message of notificationText" icon="fas fa-check" [text]="message"></dxi-item>
+        </dx-list>
+    </div>
+</dx-popup>

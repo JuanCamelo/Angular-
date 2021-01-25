@@ -1,0 +1,22 @@
+::ng-deep oph-vitals {
+	.dx-accordion-item-title,
+	.dx-accordion-item-title:hover,
+	.dx-accordion-item-title:active {
+		background-color: var(--sideBarMain) !important;
+		.dx-accordion-item-title-caption {
+			color: white !important;
+		}
+		&::before {
+			color: white !important;
+		}
+		// .dx-accordion {
+		//     background-color: #ffffff;
+		// }
+	}
+}
+
+.imperium-frame {
+	width: 100%;
+	height: auto;
+	min-height: 600px;
+}

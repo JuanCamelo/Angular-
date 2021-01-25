@@ -1,0 +1,15 @@
+<app-menu-container
+    #fanMenu
+    [options]="options" 
+    [startAngles]="startAngles"
+    [wings]="_wings" 
+    [gutter]="menuGutter" 
+    (onMenuBtnClicked)="menuBtnClicked($event)"
+    (onWingSelected)="wingSelected($event)" 
+    (onWingHovered)="wingHovered($event)"
+    (window:resize)="onResize($event)"
+    (mouseout)="hoveredOut()"
+    style="z-index: 2;"
+    >
+</app-menu-container> 
+<div #tooltip class="tooltip-menu"></div>

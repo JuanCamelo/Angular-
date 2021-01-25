@@ -1,0 +1,22 @@
+<br>
+<div id="container">
+  <button (click)="showInfo()" type="button" class="btn btn-outline-primary btn-sm fas fa-code-branch ml-1">
+    {{versionTitle}}</button>
+  <dx-popup width="600" height="auto" [showTitle]="true" title="{{versionTitle}}" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="popupVisible">
+    <div *dxTemplate="let data of 'content'">
+      <h2>{{version.date}} ({{version.version}})</h2>
+      <hr>
+      <p> Bienvenido al release {{version.version}}, {{version.release}}</p>
+      <h4 *ngIf="version.newfeature.length>0">Nuevas Características:</h4>
+      <div *ngFor="let feature of version.newfeature">
+        <li>{{feature}}</li>
+      </div>
+      <br>
+      <h4 *ngIf="version.bugs.length>0">Corrección de Bugs:</h4>
+      <div *ngFor="let bug of version.bugs">
+        <li>{{bug}}</li>
+      </div>
+    </div>
+  </dx-popup>
+</div>

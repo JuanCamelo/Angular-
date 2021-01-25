@@ -1,0 +1,10 @@
+<dx-context-menu
+    [items]="_contextMenuItems"
+    [target]="_target"
+    itemTemplate="item">
+    <div *dxTemplate="let data of 'item'; let i = index" (click)="itemClick(data.value == null ? data.text : data.value)">
+        <i *ngIf="data.icon != null && data" style="width: 18px; text-align: center;" [class]="data.icon"></i>
+        <span *ngIf="data.badgetColor != null && data.icon == null" [style.backgroundColor]="data.badgetColor" class="badget"></span>
+        <i style="margin-left:5px">{{data.text}}</i>
+    </div>
+</dx-context-menu>

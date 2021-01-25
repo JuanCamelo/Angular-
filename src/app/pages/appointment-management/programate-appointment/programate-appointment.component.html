@@ -1,0 +1,83 @@
+<div [hidden]="selfmanagement">
+    <form class="center-form gray-container">
+        <h3>Ingrese tipo y número de documento del paciente</h3>
+        <div class="main-content">
+            <dx-form #form id="form" [(formData)]="loginForm" showColonAfterLabel="true" labelLocation="top">
+                <dxi-item [colCount]="3" itemType="group">
+                    <dxi-item editorType="dxSelectBox" [label]="{text: 'Tipo de Documento'}" [editorOptions]="{ items: documentTypeList, displayExpr: 'descripcionDTO', valueExpr: 'idDTO', tabIndex:1}" dataField="IdTipoDocumento">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item editorType="dxNumberBox" [label]="{text: 'Número de Documento'}" [editorOptions]="{ tabIndex:2}" dataField="NumeroDocumento">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item itemType="group" verticalAlignment="bottom">
+                        <dx-button text="Lista de espera" type="success" tabIndex="4" [width]="140" class="filter-button" [useSubmitBehavior]="false" (onClick)="onSubmitForm($event)">
+                        </dx-button>
+                        <dx-button text="Buscar" type="success" [width]="140" tabIndex="3" class="filter-button" icon="search" [useSubmitBehavior]="false" (onClick)="onSubmitForm($event)">
+                        </dx-button>
+                    </dxi-item>
+                </dxi-item>
+            </dx-form>
+        </div>
+    </form>
+    <hr>
+    <oph-info-patient-top *ngIf="existPatien"></oph-info-patient-top>
+</div>
+<div *ngIf="existPatien">
+    <div class="white-container">
+        <h3>CITAS PROGRAMADAS</h3>
+    </div>
+    <div class="buttons-container">
+        <dx-button stylingMode="contained" text="Historico" type="normal" [width]="120" class="styleButton" (onClick)="showHistory($event)"></dx-button>
+        <dx-button stylingMode="contained" text="Programar" type="success" [width]="120" (onClick)="redirectToAgendarGroup($event)"></dx-button>
+    </div>
+    <br>
+    <dx-data-grid [dataSource]="($DataGrid | async)" [showBorders]="true" [showRowLines]="true" [hoverStateEnabled]="true">
+        <dxo-paging [pageSize]="5"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10]"></dxo-pager>
+        <dxi-column type="buttons">
+            <dxi-button hint="Cancelar Cita" icon="clear" [onClick]="popUpCancelAppointment"></dxi-button>
+        </dxi-column>
+        <dxi-column caption="Fecha" dataField="fechaCitaDTO" alignment="center" cellTemplate="fechaCita">
+        </dxi-column>
+        <div *dxTemplate="let data of 'fechaCita'">{{data.value | date:'dd/MM/yyyy'}}</div>
+
+        <dxi-column caption="Hora" dataField="horaCitaDTO" alignment="center"></dxi-column>
+        <dxi-column caption="Sede" dataField="instalacionPrestadorDTO" alignment="center"></dxi-column>
+        <dxi-column caption="Consultorio" dataField="consultorioDTO" alignment="center"></dxi-column>
+        <dxi-column caption="Tipo cita" dataField="tipoCitaDTO" alignment="center"></dxi-column>
+        <dxi-column caption="Especialidad" dataField="especialidadMedicaDTO" alignment="center"></dxi-column>
+        <dxi-column caption="Procedimiento" dataField="procedimientoMedicoDTO" alignment="center"></dxi-column>
+        <dxi-column caption="Profesional" alignment="center" dataField="nombreEspecialitaDTO">
+        </dxi-column>
+
+        <dxi-column type="buttons">
+            <dxi-button hint="Reagendar Cita" icon="event" [onClick]="redirectToReagendar"></dxi-button>
+        </dxi-column>
+    </dx-data-grid>
+</div>
+
+<dx-popup [showTitle]="true" title="Cancelar Cita" [closeOnOutsideClick]="false" [height]="'auto'" [width]="500" [(visible)]="isVisibleCancel">
+    <form>
+        <div style="text-align: center">
+            <div><img src="./assets/images/iconoAlerta.png" class="dialog-img"></div>
+            <div><b>{{messageMotiveCancel}}</b></div>
+            <div>
+                <br><br>
+                <dx-select-box #slcBoxMotivos [items]="($Motivos | async)" displayExpr="descripcionDTO" valueExpr="idDTO"></dx-select-box>
+            </div>
+            <div>
+                <br>
+                <dx-button stylingMode="contained" text="Confirmar" type="success" [width]="120" (onClick)="executeCancel(slcBoxMotivos.value)" class="buttonContainer"></dx-button>
+                <dx-button stylingMode="contained" text="Cerrar" type="danger" [width]="120" (onClick)="isVisibleCancel = false" class="buttonContainer"></dx-button>
+            </div>
+        </div>
+    </form>
+</dx-popup>
+
+<dx-popup [showTitle]="true" title="Historico de citas" [closeOnOutsideClick]="false" [height]="'auto'" [(visible)]="isVisibleHistory">
+    <oph-history-medical-appointments [isVisibleInfoPatient]="false"></oph-history-medical-appointments>
+</dx-popup>

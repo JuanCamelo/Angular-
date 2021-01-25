@@ -1,0 +1,23 @@
+<div class="team" (click)="onCardClicked.emit()">
+  <div class="team-header" [ngStyle]="{'background': backColor || ''}">
+    <a *ngIf="relativeRedirection" [routerLink]="relativeRedirection || ['./']" mat-button>
+      <!-- <i class="fas fa-pencil-alt"></i> -->
+      <i class="fas fa-user-edit"></i>
+    </a>
+    <div *ngIf="!relativeRedirection">
+      <i class="fas fa-user-edit"></i>
+    </div>
+    <div class="team-icon">
+      <i [class]="'fas fa-bed'"></i>
+    </div>
+    <div>
+      <!-- <i class="fas fa-trash"></i> -->
+    </div>
+  </div>
+  <div class="team-body">
+    <p>
+      <i [ngClass]="iconBody||'fas fa-users'"></i>
+      <span> {{textBody || 'Texto habitación'}}</span>
+    </p>
+  </div>
+</div>

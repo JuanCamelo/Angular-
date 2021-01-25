@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-12 col-sm-6 col-lg-4" *ngFor="let element of _dataSource; let i = index">
+        <div class="card-record">
+            <div class="button-container" *ngIf="hasObservers(onClickEditButton) || hasObservers(onClickDeleteButton)">
+                <oph-round-button (onClick)="clickEditButton(element)" *ngIf="hasObservers(onClickEditButton)" className="fas fa-pen" background="#7bc234" size="24" style="margin-right: 5px"></oph-round-button>
+                <oph-round-button (onClick)="clickDeleteButton(element)" *ngIf="hasObservers(onClickDeleteButton)" className="fas fa-times" background="#fb2d30" size="24"></oph-round-button>
+            </div>
+            <div class="card-record-header">
+                
+            </div>
+            <div class="card-record-body">
+                <ng-container *ngFor="let property of element | keyvalue: keyValueOrder; let j = index">
+                    <div class="card-record-row" *ngIf="j < _maxIterations">
+                            <i *ngIf="_iconClasses != null" [class]="_iconClasses[j]" class="icon-card"></i> 
+                            
+                            <b *ngIf="_headers == null" style="margin-left: 3px"> {{property.key}}</b>
+                            <b *ngIf="_headers != null" style="margin-left: 3px"> {{_headers[j] == null ? property.key : _headers[j]}}</b><br>
+                            <span style="margin-left: 28px">{{property.value}}</span>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

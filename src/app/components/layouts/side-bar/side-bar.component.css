@@ -1,0 +1,143 @@
+/* Contnedor del sidebar */
+.sideBar-container {
+    height: 100vh;
+    width: auto;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Estilos parte izquierda */
+.sideBar-left {
+    background-color: var(--sideBarMain);
+    width: 18em;
+    transition: 0.2s all ease-in-out;
+}
+
+.sideBar-left-shown {
+    /* opacity: 1; */
+    margin-left: 0em;
+}
+
+.sideBar-left-collapsed {
+    /* opacity: 0; */
+    margin-left: -18em;
+}
+
+h5 {
+    font-size: 16px;
+    text-align: center !important;
+    width: 100% !important;
+    font-weight: bold !important;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+/* Conentedor boton editar */
+.sidebar-edit-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 2em;
+    color: white;
+    margin-bottom: -0.8em;
+    font-size: 1.2em;
+}
+
+.sidebar-edit-container i {
+    cursor: pointer;
+}
+
+/* Contenedor imagen */
+.sideBar-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 0.5em;
+}
+
+.sideBar-image {
+    height: 9em;
+    width: 9em;
+    margin-right: 10px;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    background-image: url("./assets/images/doctor.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06);
+}
+
+.sideBar-left-buttom-container {
+    padding: 0.5em;
+    height: calc(100% - 13.9em);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sideBar-dxSelectBox {
+    margin-bottom: 1.5em;
+}
+
+/* Esilos accordion */
+
+.dx-accordion {
+    background-color: var(--sideBarMain) !important;
+    color: white;
+    width: 100% !important;
+}
+
+.dx-accordion-item-title {
+    text-align: center !important;
+    width: 100% !important;
+    color: white;
+}
+
+.sideBar-company-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0 0;
+    border-top: 1px solid white;
+}
+
+.sideBar-company-logo img {
+    width: 50%;
+}
+
+/* Estilos parte derecha */
+.sideBar-right {
+    width: 2em;
+    margin-left: -2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* Conenedor iconos */
+.sidebar-right-icon {
+    color: white;
+    padding: 0.6em;
+    width: 2.3em;
+    margin-left: 4em;
+    border-radius: 0 5px 5px 0;
+    text-align: center;
+    background-color: var(--sideBarMain);
+}
+
+.sidebar-right-icon:not(:first-child) {
+    margin-top: 0.2em;
+}

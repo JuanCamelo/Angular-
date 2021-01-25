@@ -1,0 +1,23 @@
+div.dx-popup-content .nav-tabs .nav-link {
+  border-top-left-radius: .0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+div.dx-popup-content a.nav-link {
+  color: #495057 !important;
+  font-weight: bolder !important;
+}
+
+div.dx-popup-content a.nav-link:hover {
+  border-top: 1px solid #ffffff !important;
+  border-left: 1px solid #ffffff !important;
+  border-right: 1px solid #ffffff !important;
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+div.dx-popup-content a.nav-link.active:hover {
+  border-top: 1px solid #dee2e6 !important;
+  border-left: 1px solid #dee2e6 !important;
+  border-right: 1px solid #dee2e6 !important;
+  border-bottom: 1px solid #ffffff !important;
+}

@@ -1,0 +1,60 @@
+<!-- <h3 class="highlighted-title">Laboratorios</h3> -->
+
+<oph-info-patient-top *ngIf="isVisibleInfoPatient"></oph-info-patient-top>
+<br>
+<form class="gray-container" (submit)="onFormSubmit($event)">
+    <dx-form id="form" [formData]="DataForm" showColonAfterLabel="true" labelLocation="top" minColWidth="300">
+        <dxi-item itemType="group" caption="" [colCount]="6">
+            <dxi-item [colSpan]="1" editorType="dxSelectBox" [label]="{text:'Estado'}" dataField="estadoCitaDTO" [editorOptions]="{
+                items: ($StateList | async),  
+                displayExpr: 'text',  
+                valueExpr: 'stateCode',
+                showClearButton: true
+             }">
+            </dxi-item>
+            <dxi-item [colSpan]="1" editorType="dxSelectBox" [label]="{text:'Especialidad'}" dataField="especialidadDTO" [editorOptions]="{ 
+                items: ($SpecialtyList | async),
+                displayExpr: 'descripcionDTO',  
+                valueExpr: 'idDTO',
+                showClearButton: true
+            }">
+            </dxi-item>
+            <dxi-item [colSpan]="1" editorType="dxSelectBox" [label]="{text:'Sede'}" dataField="instalacionPrestadorDTO" [editorOptions]="{ 
+                items: ($CampusList | async),   
+                displayExpr: 'descriptionDTO',  
+                valueExpr: 'idDTO',
+                showClearButton: true
+             }">
+            </dxi-item>
+            <dxi-item [colSpan]="1" dataField="fechaInicialDTO" [label]="{text:'Desde'}" editorType="dxDateBox" [editorOptions]="{ max: Max, min: Min }">
+            </dxi-item>
+            <dxi-item [colSpan]="1" dataField="fechaFinalDTO" [label]="{text:'Hasta'}" editorType="dxDateBox" [editorOptions]="{ max: Max, min: Min}">
+            </dxi-item>
+            <dxi-item [colSpan]="1" itemType="button" [buttonOptions]="{
+                text: 'Buscar',
+                type: 'success',
+                icon: 'fas fa-search',
+                useSubmitBehavior: true,
+                width:'100%'}" verticalAlignment="bottom">
+            </dxi-item>
+        </dxi-item>
+    </dx-form>
+</form>
+
+<dx-data-grid [dataSource]="History" [showBorders]="true" [showRowLines]="true" [hoverStateEnabled]="true">
+    <dxo-paging [pageSize]="5"></dxo-paging>
+    <dxi-column caption="Estado" dataField="estadoDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Fecha" dataField="fechaCitaDTO" dataType="date" alignment="center" cellTemplate="fechaCita">
+    </dxi-column>
+    <div *dxTemplate="let data of 'fechaCita'">
+        {{data.value | date:'dd/MM/yyyy'}}
+    </div>
+    <dxi-column caption="Hora" dataField="horaCitaDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Sede" dataField="instalacionPrestadorDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Consultorio" dataField="consultorioDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Tipo cita" dataField="tipoCitaDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Especialidad" dataField="especialidadMedicaDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Procedimiento" dataField="procedimientoMedicoDTO" alignment="center"></dxi-column>
+    <dxi-column caption="Profesional" dataField="nombreEspecialitaDTO" alignment="center">
+    </dxi-column>
+</dx-data-grid>

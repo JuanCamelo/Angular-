@@ -1,0 +1,9 @@
+{
+    "urlApi": "https://factorydev.digitalwaresaas.com.co:8085/klinicapi/api/",
+    "klinicApi": "https://factorydev.digitalwaresaas.com.co:8085/klinicapi/api/",
+    "urlApolo": "https://factorydev.digitalwaresaas.com.co:8085/Apolo/#/redirect-external",
+    "urlSSBApi": "https://factorydev.digitalwaresaas.com.co:8085/AgoraApi/api",
+    "urlRedirectLogin": "https://bitest.digitalwaresaas.com.co:9595/portalv2/#/auth?url=$navigateTo",
+    "urlAppointmentScheduler": "https://factorydev.digitalwaresaas.com.co:8085/Schedule/#/calendario",
+    "apoloParams": "&templateCode=PLA_PACIENTE&version=7&mode=new&navigateTo=form-visualization"
+}

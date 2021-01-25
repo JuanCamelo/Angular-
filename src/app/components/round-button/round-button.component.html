@@ -1,0 +1,10 @@
+<div style="position: relative; display: inline-block;" class="btnt">
+
+  <a [routerLink]="_link" class="oph-round-button" [ngStyle]="styles" queryParamsHandling="preserve"
+    (click)="onClick.emit()">
+    <i class="{{_className}}"></i>
+  </a>
+  <span class="oph-round-button-tooltip" *ngIf="_tooltip != ''">
+    {{_tooltip}}
+  </span>
+</div>

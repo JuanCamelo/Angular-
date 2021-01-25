@@ -1,0 +1,10 @@
+.content-horizontal {
+    display: flex;
+}
+
+.box {
+    text-align: center;
+    margin: 0;
+    width: 35%;
+    padding: 0px;
+}

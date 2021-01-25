@@ -1,0 +1,83 @@
+<dx-accordion #accordion1 [collapsible]="true" [multiple]="true" [animationDuration]="300">
+
+    <dxi-item title="Signos Vitales" [expanded]="false">
+
+        <dx-form id="form" [formData]="formData" labelLocation="top" (onFieldDataChanged)="onFormChanged($event)">
+            <dxi-item itemType="group" [colCount]="4">
+
+                <dxi-item dataField="Temperatura" [editorOptions]="{placeholder: '°C'}" editorType="dxNumberBox"></dxi-item>
+                <dxi-item dataField="FecuenciaCardiaca" [editorOptions]="{placeholder: 'lat/min'}" editorType="dxNumberBox">
+                </dxi-item>
+                <dxi-item dataField="FrecuenciaRespiratoria" [editorOptions]="{placeholder: 'Res/min'}" editorType="dxNumberBox"> </dxi-item>
+                <dxi-item dataField="SaturacionOxigeno" [editorOptions]="{placeholder: '%'}" editorType="dxNumberBox">
+                </dxi-item>
+                <dxi-item dataField="FraccionOxigenoInspirado" [editorOptions]="{placeholder: '%'}" editorType="dxNumberBox">
+                </dxi-item>
+                <!-- <dxi-item dataField="ViaTomaTemperatura" [editorOptions]="{placeholder: ''}" editorType="dxNumberBox">
+                </dxi-item> -->
+            </dxi-item>
+            <dxi-item itemType="group" [colCount]="2">
+                <dxi-item itemType="group" [colCount]="2" caption="Tension Arterial de Pie">
+                    <dxi-item dataField="PresionArterialDePieSistolica" [label]="{text:'Sistolica'}" [editorOptions]="{placeholder: 'mmHg'}" editorType="dxNumberBox">
+                    </dxi-item>
+                    <dxi-item dataField="PresionArterialDePiaDiastolica" [label]="{text:'Diastolica'}" [editorOptions]="{placeholder: 'mmHg'}" editorType="dxNumberBox">
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group" [colCount]="2" caption="Tension Arterial Acostado">
+                    <dxi-item dataField="PresionArterialAcostadoSistolica" [label]="{text:'Sistolica'}" [editorOptions]="{placeholder: 'mmHg'}" editorType="dxNumberBox">
+                    </dxi-item>
+                    <dxi-item dataField="PresionArterialAcostadoDiastolica" [label]="{text:'Diastolica'}" [editorOptions]="{placeholder: 'mmHg'}" editorType="dxNumberBox">
+                    </dxi-item>
+                </dxi-item>
+            </dxi-item>
+
+            <dxi-item itemType="group" [colCount]="8" caption="Medidas Antropometricas">
+                <dxi-item dataField="Peso" [editorOptions]="{ placeholder: 'Kg' }" editorType="dxNumberBox">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="Talla" [editorOptions]="{ placeholder: 'm' }" editorType="dxNumberBox">
+                    <dxi-validation-rule type="required"></dxi-validation-rule>
+                </dxi-item>
+                <dxi-item dataField="PerimetroAbdominal" [colSpan]="2" [editorOptions]="{ placeholder: 'cm' }" editorType="dxNumberBox"></dxi-item>
+                <dxi-item dataField="IndiceDeMasaCorporal" [colSpan]="2" [label]="{text: 'Índice Masa Corporal'}" editorType="dxNumberBox"></dxi-item>
+                <dxi-item dataField="Clasificación" [colSpan]="2" [label]="{text: 'Clasificación'}" editorType="dxNumberBox">
+                </dxi-item>
+            </dxi-item>
+        </dx-form>
+        <hr>
+        <div>
+
+            <h5 style="font-weight: bold">Histórico de Signos Vitales</h5>
+            <dx-data-grid [dataSource]="gridData" [showBorders]="true" [showRowLines]="true" [hoverStateEnabled]="true">
+                <!-- <dxo-paging [pageSize]="12"></dxo-paging>
+                          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[8, 12, 20]"></dxo-pager> -->
+                <dxo-paging [pageSize]="5" [enabled]="true"></dxo-paging>
+                <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10]" [showInfo]="true">
+                </dxo-pager>
+
+                <dxi-column caption="Fecha" dataField="Fecha" alignment="center"></dxi-column>
+                <dxi-column caption="T°" dataField="Temperatura" alignment="center"></dxi-column>
+                <dxi-column caption="FC" dataField="FrecuenciaCardiaca" alignment="center"></dxi-column>
+                <dxi-column caption="FR" cellTemplate="FrecuenciaRespiratoria" dataField="" alignment="center">
+                </dxi-column>
+                <dxi-column caption="Tensión Sistólica" dataField="TensionSistolica" alignment="center"></dxi-column>
+                <dxi-column caption="Tensión Diastólica" dataField="TensionDiastolica" alignment="center"></dxi-column>
+                <dxi-column caption="SaO2" dataField="SaturacionOxigeno" alignment="center"></dxi-column>
+
+                <div *dxTemplate="let data of 'resultadoTemplate'">
+                    <a href="#" style="color: #000000">
+                        <i class="fas fa-file-signature" style="font-size: 20px;"></i>
+                    </a>
+                </div>
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+            </dx-data-grid>
+        </div>
+        <hr>
+        <h5>Gráfico de Signos Vitales</h5>
+        <iframe [src]="imperiumUrl | urlSafe" frameborder="0" class="imperium-frame"></iframe>
+
+
+    </dxi-item>
+
+</dx-accordion>

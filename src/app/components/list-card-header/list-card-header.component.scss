@@ -1,0 +1,36 @@
+.header-docs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1em;
+  margin: 0.8em 0 1.5em 0;
+
+  .item-doc {
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    // color: white;
+    padding: 0.3em 0;
+    cursor: pointer;
+    .title {
+      display: flex;
+      justify-content: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+    .number {
+      min-height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // font-size: 1.1em;
+      font-weight: bold;
+
+      span {
+        background: #808080;
+        border-radius: 30px;
+        padding: 0 0.6em;
+        color: white;
+      }
+    }
+  }
+}

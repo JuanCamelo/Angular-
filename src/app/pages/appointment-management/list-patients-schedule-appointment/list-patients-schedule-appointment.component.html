@@ -1,0 +1,123 @@
+<form (submit)="onSearch($event)" class="gray-container">
+    <h4>Criterios de Búsqueda</h4>
+    <dx-form #formDatesRequest [formData]="formDataDatesRequest" labelLocation="top" [colCount]="3" [disabled]="false" [readOnly]="false">
+        <dxi-item dataField="idTipoDocumento" [label]="{ text: 'Tipo de identificación' }" editorType="dxSelectBox" [editorOptions]="{
+        dataSource: documentTypesList,
+        displayExpr: 'descripcionDTO',
+        valueExpr: 'idDTO',
+        showClearButton: true,
+        searchEnabled: true
+      }">
+        </dxi-item>
+
+        <dxi-item dataField="numeroDocumento" [label]="{ text: 'No Documento' }" [editorOptions]="{ showClearButton: true }" editorType="dxNumberBox">
+        </dxi-item>
+
+        <dxi-item dataField="idTipoCita" [label]="{ text: 'Tipo de cita' }" editorType="dxSelectBox" [editorOptions]="{
+        dataSource: typeOfAppointment,
+        displayExpr: 'descripcionDTO',
+        valueExpr: 'idDTO',
+        showClearButton: true,
+        searchEnabled: true
+      }">
+        </dxi-item>
+
+        <dxi-item dataField="idTipoEspecialidad" [label]="{ text: 'Especialidad' }" editorType="dxSelectBox" [editorOptions]="{
+        dataSource: typeOfSpecialty,
+        displayExpr: 'descripcionDTO',
+        valueExpr: 'idDTO',
+        showClearButton: true,
+        searchEnabled: true,
+        onValueChanged: onSpecialityChange
+      }">
+        </dxi-item>
+
+        <dxi-item dataField="idTipoProcedimiento" editorType="dxSelectBox" [label]="{ text: 'Procedimiento' }" [editorOptions]="{
+        dataSource: typeOfProcedure,
+        displayExpr: 'descripcionDTO',
+        valueExpr: 'idDTO',
+        showClearButton: true,
+        searchEnabled: true
+      }">
+        </dxi-item>
+
+        <dxi-item dataField="fechaAsignacion" editorType="dxDateBox" [label]="{ text: 'Fecha de asignación' }" [editorOptions]="{ width: '100%', showClearButton: true}"></dxi-item>
+
+        <dxi-item dataField="fechaDeseada" editorType="dxDateBox" [label]="{ text: 'Fecha deseada' }" [editorOptions]="{ width: '100%', showClearButton: true}"></dxi-item>
+
+        <dxi-item></dxi-item>
+
+        <dxi-item [colSpan]="3" itemType="button" [buttonOptions]="{
+        text: 'Buscar',
+        type: 'success',
+        alignment: 'right',
+        icon: 'search',
+        useSubmitBehavior: true,
+        width: '35%'
+      }" horizontalAlignment="right" verticalAlignment="bottom">
+        </dxi-item>
+    </dx-form>
+</form>
+
+<dx-data-grid id="gridContainer" class="awaitGrid" [dataSource]="gridAppointments" [showBorders]="true" [showRowLines]="true" [remoteOperations]="true" [hoverStateEnabled]="true">
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 30, 60]"></dxo-pager>
+
+    <!-- grid captions -->
+    <dxi-column type="buttons" width="60">
+        <dxi-button hint="Cancelar Cita" icon="clear" [onClick]="showModalCancel"></dxi-button>
+    </dxi-column>
+
+    <dxi-column caption="Fecha y hora" dataField="fechaHora" dataType="datetime" [editorOptions]="{ type: 'date' }" alignment="left" width="auto" cellTemplate="fecha"></dxi-column>
+
+    <div *dxTemplate="let data of 'fecha'">
+        {{data.value | date:'dd/MM/yyyy HH:mm'}}
+    </div>
+    <dxi-column caption="Nombre Paciente" dataField="nombrePaciente" dataType="string" alignment="left" width="auto">
+    </dxi-column>
+    <dxi-column caption="Edad" dataField="edad" dataType="string" alignment="left" width="auto"></dxi-column>
+    <dxi-column caption="Tip Docu" dataField="tipoDocumento" alignment="left" width="auto"></dxi-column>
+    <dxi-column caption="Número Documento" dataField="numeroDocumento" alignment="left" width="auto"></dxi-column>
+    <dxi-column caption="Teléfono" dataField="telefonos" alignment="left" width="auto"></dxi-column>
+    <dxi-column caption="Contrato" dataField="contrato" dataType="string" width="auto" alignment="left"></dxi-column>
+    <dxi-column caption="Tipo Cita" dataField="tipoCita" dataType="string" width="auto" alignment="left"></dxi-column>
+    <dxi-column caption="Procedimiento o Actividad" dataField="procedimiento" dataType="string" width="auto" alignment="left">
+    </dxi-column>
+    <dxi-column caption="Especialidad o Programa" cellTemplate="cellTemplate" dataField="especialidad" dataType="string" width="auto" alignment="left">
+    </dxi-column>
+    <dxi-column caption="Fecha Deseada" dataField="fechaDeseada" dataType="date" alignment="left" width="120">
+    </dxi-column>
+
+    <div *dxTemplate="let data of 'cellTemplate'">
+        {{data.data.programa === null ? data.data.especialidad : data.data.programa}}
+    </div>
+
+    <dxi-column type="buttons" width="80">
+        <dxi-button hint="Reagendar Cita" icon="event" [onClick]="redirectToReagendar">
+        </dxi-button>
+    </dxi-column>
+    <!-- Button -->
+</dx-data-grid>
+
+<dx-popup [showTitle]="true" title="Cancelar Cita" [closeOnOutsideClick]="false" [height]="'auto'" [width]="500" [(visible)]="isVisibleCancel" (onHidden)="onPopUpCancelHide()">
+    <div style="text-align: center">
+        <div>
+            <img src="./assets/images/iconoAlerta.png" class="dialog-img">
+        </div>
+        <div>
+            <b>{{'cancelAppointment.message.motive.confirm' | translate}}</b>
+        </div>
+        <div>
+            <br><br>
+            <dx-select-box #slBoxMotivos [items]="$motivos" displayExpr="descripcionDTO" valueExpr="idDTO">
+            </dx-select-box>
+        </div>
+        <div class="buttonContainer">
+            <br>
+            <dx-button stylingMode="contained" class="button-item" text="Confirmar" type="success" [width]="127" (onClick)="executeCancel(slBoxMotivos.value)" icon="check">
+            </dx-button>
+            <dx-button stylingMode="contained" class="button-item" text="Cerrar" type="danger" [width]="120" (onClick)="isVisibleCancel = false" icon="close">
+            </dx-button>
+        </div>
+    </div>
+</dx-popup>
