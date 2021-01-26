@@ -1,0 +1,22 @@
+<dx-data-grid id="gridContainer" class="awaitGrid" [dataSource]="medicines" [showBorders]="true" [showRowLines]="true"
+  [remoteOperations]="true" [hoverStateEnabled]="true" (onRowClick)="startEdit($event)">
+  <dxo-selection mode="single"></dxo-selection>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 30, 60]"></dxo-pager>
+
+  <dxo-column-chooser [enabled]="false"></dxo-column-chooser>
+  <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
+  <!-- <dxi-column  caption="Sel">
+    <dx-check-box [value]="false"></dx-check-box>
+  </dxi-column> -->
+  <dxi-column dataField="ordenMedica" caption="Orden médica"></dxi-column>
+  <dxi-column dataField="estado" caption="Estado"></dxi-column>
+  <dxi-column dataField="fechaFormula" caption="Fecha Fórmula"></dxi-column>
+  <dxi-column dataField="medicamento" caption="Medicamento"></dxi-column>
+  <dxi-column dataField="concentracion" caption="Concentración"></dxi-column>
+  <dxi-column dataField="dosis" caption="Dosis"></dxi-column>
+  <dxi-column dataField="viaAplicacion" caption="Via Aplicación"></dxi-column>
+  <dxi-column dataField="fRhora" caption="FR/hora"></dxi-column>
+  <dxi-column dataField="cantidad" caption="Cantidad"></dxi-column>
+  <dxi-column dataField="observacion" caption="Observación" [width]="300"></dxi-column>
+</dx-data-grid>

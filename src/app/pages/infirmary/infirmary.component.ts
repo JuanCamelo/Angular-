@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfirmaryComponent implements OnInit {
 
+  routesList = [
+    // { name: 'Programar Citas', path: 'citas-individuales', icon: '' },
+    { name: 'Administración de medicamentos', path: 'administracion-medicamentos', icon: '' },
+  ]
+
   constructor() { }
 
   ngOnInit() {

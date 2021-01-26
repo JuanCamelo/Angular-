@@ -1,0 +1,96 @@
+<br><br>
+<dx-form #formDatesRequest [formData]="medicine" labelLocation="top" [colCount]="12" [disabled]="false"
+  [readOnly]="false">
+
+  <dxi-item [colSpan]="2" dataField="fechaAplicacion" editorType="dxDateBox" [label]="{ text: 'Fecha Aplicación' }"
+    [editorOptions]="{ width: '100%', showClearButton: true, max:currentDate}"></dxi-item>
+
+  <dxi-item [colSpan]="2" dataField="horaAplicacion" editorType="dxDateBox" [label]="{ text: 'Hora Aplicación' }"
+    [editorOptions]="{ width: '100%', showClearButton: true, type: 'time'}"></dxi-item>
+
+  <!-- Este campo no es Editable -->
+  <dxi-item [colSpan]="2" dataField="dosis" [label]="{ text: 'Dosis' }"
+    [editorOptions]="{ showClearButton: true, disabled: true}" editorType="dxTextBox">
+  </dxi-item>
+
+  <dxi-item [colSpan]="1" dataField="goteo" [label]="{ text: 'Goteo' }" editorType="dxCheckBox">
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" dataField="cantidad" [visible]="medicine.goteo" [label]="{ text: 'Cantidad Goteo' }"
+    editorType="dxNumberBox" [editorOptions]="{
+      showSpinButtons:true, showClearButton:true
+    }">
+  </dxi-item>
+  <!-- Este Campo no es Editable -->
+  <dxi-item [colSpan]="1" dataField="fRhora" [label]="{ text: 'Frecuecnica/Hora' }" editorType="dxTextBox"
+    [editorOptions]="{
+      showSpinButtons:true, showClearButton:true, disabled: true
+    }">
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" dataField="ordenMedica" [label]="{ text: 'Unidades Inventario Aplicadas' }"
+    editorType="dxNumberBox" [editorOptions]="{
+    showSpinButtons:true, showClearButton:true
+  }">
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" dataField="unidadDeMedida" [label]="{ text: 'Unidad de Medida' }" editorType="dxSelectBox"
+    [editorOptions]="{
+      dataSource: unidadesDeMedida,
+      showClearButton: true,
+      searchEnabled: true
+    }">
+  </dxi-item>
+
+  <dxi-item [colSpan]="4" dataField="observacion" [label]="{ text: 'Observaciones' }"
+    [editorOptions]="{ showClearButton: true}" editorType="dxTextArea">
+  </dxi-item>
+
+  <dxi-item [colSpan]="2">
+    <div *dxTemplate>
+      <dx-radio-group [items]="priorities" [value]="priorities[0]">
+      </dx-radio-group>
+    </div>
+
+  </dxi-item>
+
+  <dxi-item [colSpan]="3">
+    <div *dxTemplate>
+      <dx-check-box [value]="true" [width]="300" text="confirmar fecha primera aplicación"></dx-check-box>
+    </div>
+  </dxi-item>
+  <dxi-item [colSpan]="1" itemType="empty">
+  </dxi-item>
+
+  <dxi-item [colSpan]="5" itemType="empty">
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate>
+      <dx-button stylingMode="contained" text="Limpiar" type="normal" width="100%" (onClick)="limpiar()">
+      </dx-button>
+    </div>
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate>
+      <dx-button stylingMode="contained" text="Aplazar" type="success" width="100%" (onClick)="limpiar()">
+      </dx-button>
+    </div>
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate>
+      <dx-button stylingMode="contained" text="Guardar" type="success" width="100%" (onClick)="limpiar()">
+      </dx-button>
+    </div>
+  </dxi-item>
+
+  <dxi-item [colSpan]="1" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate>
+      <dx-button icon="upload" stylingMode="contained" type="default" width="100%" (onClick)="limpiar()">
+      </dx-button>
+    </div>
+  </dxi-item>
+
+</dx-form>

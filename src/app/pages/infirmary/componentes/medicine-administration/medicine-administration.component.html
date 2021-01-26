@@ -1,0 +1,7 @@
+
+<!-- <dx-load-panel [position]="loadPanelPosition" [visible]="isLoading">
+</dx-load-panel> -->
+<!-- Tabla -->
+<oph-medicine-table (dataMedicina)="medicine =$event"></oph-medicine-table>
+<!-- Formulario -->
+<oph-medicine-form [medicine]="medicine" *ngIf="medicine"></oph-medicine-form>
