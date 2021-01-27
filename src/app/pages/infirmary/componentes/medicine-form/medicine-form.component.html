@@ -44,6 +44,7 @@
 
   <dxi-item [colSpan]="4" dataField="observacion" [label]="{ text: 'Observaciones' }"
     [editorOptions]="{ showClearButton: true}" editorType="dxTextArea">
+      <dxi-validation-rule type="required" message="Obsevacion es requerido"></dxi-validation-rule>
   </dxi-item>
 
   <dxi-item [colSpan]="2">
@@ -59,6 +60,10 @@
       <dx-check-box [value]="true" [width]="300" text="confirmar fecha primera aplicación"></dx-check-box>
     </div>
   </dxi-item>
+
+  <dxi-item [colSpan]="2" itemType="empty" [visible]="medicine.goteo == false">
+  </dxi-item>
+
   <dxi-item [colSpan]="1" itemType="empty">
   </dxi-item>
 

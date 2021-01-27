@@ -30,7 +30,6 @@ export class MedicineTableComponent implements OnInit {
       },
       expand: 'ResponsibleEmployee',
       select: [
-        'sel',
         'ordenMedica',
         'estado',
         'fechaFormula',
@@ -57,6 +56,7 @@ export class MedicineTableComponent implements OnInit {
 
   startEdit(e) {
     this.medicine = {
+      id: e.data.id,
       ordenMedica: e.data.ordenMedica,
       estado: e.data.estado,
       fechaFormula: e.data.fechaFormula,
