@@ -20,7 +20,7 @@ export class InterceptorService implements HttpInterceptor {
       req = req.clone({ headers: req.headers.set('Authorization', `OpheliaSuite ${sess.token}`).set('__Language__', (sess.selectedLanguage || 'es-CO')) });
     }
 
-    if (this.sessionService.session.selectedCompany)
+    if (this.sessionService.session)
       req = req.clone({
         headers: req.headers
           .set('Prestador', this.sessionService.session.selectedCompany.code)

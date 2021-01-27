@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Medicine } from '../../models/medicine';
 
 @Component({
@@ -25,6 +26,9 @@ export class MedicineFormComponent implements OnInit {
   currentDate = new Date(Date.now());
   unidadesDeMedida = ['Ampolla', 'Tableta','Frasco','Caja','Otro'];
   priorities: string[] = ['Botiquin', 'Farmacia', 'Dispensación automatica'];
+  value: any[] = [];
+
+
   constructor() {
   }
 

@@ -20,4 +20,6 @@ export class ThemeAssets {
     primaryButtonTextColor = '#ffffff';
     secundaryButtonColor = '#ffffff';
     secundaryButtonTextColor = '#ffffff';
+    toolBarColor = '#ffffff';
+    toolBarTextColor = '#ffffff';
 }

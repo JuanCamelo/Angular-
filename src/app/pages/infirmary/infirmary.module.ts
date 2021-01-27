@@ -8,6 +8,8 @@ import { DevextremeModule } from 'src/app/components/devextreme/devextreme.modul
 import { MedicineAdministrationComponent } from './componentes/medicine-administration/medicine-administration.component';
 import { MedicineTableComponent } from './componentes/medicine-table/medicine-table.component';
 import { MedicineFormComponent } from './componentes/medicine-form/medicine-form.component';
+import { DxFileUploaderModule } from 'devextreme-angular';
+import { GridHeaderColorDirectiveModule } from 'src/app/directive/grid-header-color.directive';
 
 
 const routes: Routes = [
@@ -35,8 +37,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     DevextremeModule,
+    DxFileUploaderModule,
     ComponentsModule,
-    TranslateModule
+    TranslateModule,
+    GridHeaderColorDirectiveModule
   ],
   providers: [
     TranslateService

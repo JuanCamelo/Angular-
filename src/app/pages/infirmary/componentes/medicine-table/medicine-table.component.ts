@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { SessionService } from 'src/app/services/session.service';
+import { StylingService } from 'src/app/services/styling.service';
 import { Medicine } from '../../models/medicine';
 import { MedicineService } from '../../services/medicine.service';
 
@@ -11,6 +13,7 @@ export class MedicineTableComponent implements OnInit {
 
   @Output() dataMedicina: EventEmitter<Medicine> = new EventEmitter();
 
+  gridId: string;
   dataSource: any;
   priority: any[];
   medicines: Medicine[];
@@ -21,7 +24,9 @@ export class MedicineTableComponent implements OnInit {
   loadPanelPosition = { of: '#gridContainer' };
 
 
-  constructor(private medicineService: MedicineService) {
+  constructor(private medicineService: MedicineService,
+    private sessionService: SessionService,
+    private stylingService: StylingService,) {
     this.dataSource = {
       store: {
         type: 'odata',
@@ -51,6 +56,7 @@ export class MedicineTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gridId = this.medicineService.generateUuid();
     this.medicines = this.medicineService.getMedicines();
   }
 
@@ -76,6 +82,18 @@ export class MedicineTableComponent implements OnInit {
   showModalCancel(e) {
     // this.idCita = e.row.data.idListaEspera
     // this.isVisibleCancel = true;
+  }
+
+  onContentReady(e: any) {
+    if (this.sessionService.session) {
+      setTimeout(() => {
+        const gridEl = document.getElementById(this.gridId);
+        if (gridEl && this.sessionService.session.selectedCompany.theme !== null) {
+          this.stylingService.setGridHeaderColorStyle(gridEl, this.sessionService.session.selectedCompany.theme);
+          this.stylingService.setGridHeaderTextColorStyle(gridEl, this.sessionService.session.selectedCompany.theme);
+        }
+      }, 1);
+    }
   }
 
 }

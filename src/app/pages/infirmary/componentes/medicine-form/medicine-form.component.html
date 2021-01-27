@@ -6,23 +6,26 @@
     [editorOptions]="{ width: '100%', showClearButton: true, max:currentDate}"></dxi-item>
 
   <dxi-item [colSpan]="2" dataField="horaAplicacion" editorType="dxDateBox" [label]="{ text: 'Hora Aplicación' }"
-    [editorOptions]="{ width: '100%', showClearButton: true, type: 'time'}"></dxi-item>
+    [editorOptions]="{ width: '100%', showClearButton: true, type: 'time', max:currentDate}">
+    <!-- <dxi-validation-rule type="range"  [max]="currentDate" message="La hora no de ser superior a la actual"></dxi-validation-rule> -->
+  </dxi-item>
 
   <!-- Este campo no es Editable -->
-  <dxi-item [colSpan]="2" dataField="dosis" [label]="{ text: 'Dosis' }"
+  <dxi-item [colSpan]="1" dataField="dosis" [label]="{ text: 'Dosis' }"
     [editorOptions]="{ showClearButton: true, disabled: true}" editorType="dxTextBox">
   </dxi-item>
 
-  <dxi-item [colSpan]="1" dataField="goteo" [label]="{ text: 'Goteo' }" editorType="dxCheckBox">
+  <dxi-item [colSpan]="1" dataField="goteo" [label]="{ text: 'Goteo' }" editorType="dxSwitch"
+    [editorOptions]="{switchedOffText:'NO', switchedOnText:'SI'}">
   </dxi-item>
 
-  <dxi-item [colSpan]="2" dataField="cantidad" [visible]="medicine.goteo" [label]="{ text: 'Cantidad Goteo' }"
+  <dxi-item [colSpan]="1" dataField="cantidad" [visible]="medicine.goteo" [label]="{ text: 'Cantidad Goteo' }"
     editorType="dxNumberBox" [editorOptions]="{
-      showSpinButtons:true, showClearButton:true
+      showSpinButtons:true, showClearButton:false
     }">
   </dxi-item>
   <!-- Este Campo no es Editable -->
-  <dxi-item [colSpan]="1" dataField="fRhora" [label]="{ text: 'Frecuecnica/Hora' }" editorType="dxTextBox"
+  <dxi-item [colSpan]="1" dataField="fRhora" [label]="{ text: 'Frecuencia/Hora' }" editorType="dxTextBox"
     [editorOptions]="{
       showSpinButtons:true, showClearButton:true, disabled: true
     }">
@@ -30,7 +33,7 @@
 
   <dxi-item [colSpan]="2" dataField="ordenMedica" [label]="{ text: 'Unidades Inventario Aplicadas' }"
     editorType="dxNumberBox" [editorOptions]="{
-    showSpinButtons:true, showClearButton:true
+    showSpinButtons:true, showClearButton:false
   }">
   </dxi-item>
 
@@ -42,59 +45,67 @@
     }">
   </dxi-item>
 
-  <dxi-item [colSpan]="4" dataField="observacion" [label]="{ text: 'Observaciones' }"
-    [editorOptions]="{ showClearButton: true}" editorType="dxTextArea">
-      <dxi-validation-rule type="required" message="Obsevacion es requerido"></dxi-validation-rule>
+  <dxi-item [colSpan]="2" itemType="empty" [visible]="medicine.goteo == false">
   </dxi-item>
 
-  <dxi-item [colSpan]="2">
-    <div *dxTemplate>
-      <dx-radio-group [items]="priorities" [value]="priorities[0]">
+
+  <dxi-item [colSpan]="4">
+    <div *dxTemplate  class="espacio">
+      <dx-radio-group [items]="priorities" [value]="priorities[0]" layout="horizontal">
       </dx-radio-group>
     </div>
 
   </dxi-item>
 
   <dxi-item [colSpan]="3">
-    <div *dxTemplate>
-      <dx-check-box [value]="true" [width]="300" text="confirmar fecha primera aplicación"></dx-check-box>
+    <div *dxTemplate  class="espacio">
+      <dx-check-box [value]="true" [width]="300" text="Confirmar fecha primera aplicación"></dx-check-box>
     </div>
   </dxi-item>
 
-  <dxi-item [colSpan]="2" itemType="empty" [visible]="medicine.goteo == false">
+  <dxi-item [colSpan]="4" dataField="observacion" [label]="{ text: 'Observaciones' }"
+    [editorOptions]="{ showClearButton: true}" editorType="dxTextArea">
+    <dxi-validation-rule type="required" message="Obsevacion es requerido"></dxi-validation-rule>
   </dxi-item>
 
   <dxi-item [colSpan]="1" itemType="empty">
   </dxi-item>
 
-  <dxi-item [colSpan]="5" itemType="empty">
+  <dxi-item [colSpan]="7" itemType="empty">
   </dxi-item>
 
-  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
-    <div *dxTemplate>
-      <dx-button stylingMode="contained" text="Limpiar" type="normal" width="100%" (onClick)="limpiar()">
-      </dx-button>
-    </div>
-  </dxi-item>
-
-  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
-    <div *dxTemplate>
-      <dx-button stylingMode="contained" text="Aplazar" type="success" width="100%" (onClick)="limpiar()">
-      </dx-button>
-    </div>
-  </dxi-item>
-
-  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
-    <div *dxTemplate>
-      <dx-button stylingMode="contained" text="Guardar" type="success" width="100%" (onClick)="limpiar()">
+  <dxi-item [colSpan]="1" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate class="espacio">
+      <dx-button stylingMode="contained" text="Guardar" type="success" (onClick)="limpiar()">
       </dx-button>
     </div>
   </dxi-item>
 
   <dxi-item [colSpan]="1" horizontalAlignment="right" verticalAlignment="bottom">
-    <div *dxTemplate>
-      <dx-button icon="upload" stylingMode="contained" type="default" width="100%" (onClick)="limpiar()">
+    <div *dxTemplate class="espacio">
+      <dx-button stylingMode="contained" text="Aplazar"  type="default" (onClick)="limpiar()">
       </dx-button>
+    </div>
+  </dxi-item>
+
+
+  <dxi-item [colSpan]="1" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate class="espacio">
+      <dx-button stylingMode="contained" text="Limpiar" type="normal" (onClick)="limpiar()">
+      </dx-button>
+    </div>
+  </dxi-item>
+
+  <dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
+    <div *dxTemplate >
+
+      <dx-file-uploader labelText="" [multiple]="false" accept="*" uploadMode="instantly"
+        selectButtonText="Subir imagen o archivo" #fileUploader
+        uploadUrl="https://js.devexpress.com/Demos/NetCore/FileUploader/Upload">
+      </dx-file-uploader>
+
+      <!-- <dx-button icon="upload" stylingMode="contained" type="default" (onClick)="limpiar()">
+      </dx-button> -->
     </div>
   </dxi-item>
 
