@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Medicine } from '../../models/medicine';
 
 @Component({
@@ -7,8 +6,13 @@ import { Medicine } from '../../models/medicine';
   templateUrl: './medicine-form.component.html',
   styleUrls: ['./medicine-form.component.scss']
 })
-export class MedicineFormComponent implements OnInit {
+export class MedicineFormComponent {
+
+
+  @Output() dataMedicina: EventEmitter<Medicine> = new EventEmitter();
+
   @Input() medicine: Medicine = {
+    id: null,
     ordenMedica: null,
     estado: '',
     fechaFormula: null,
@@ -31,11 +35,9 @@ export class MedicineFormComponent implements OnInit {
 
   constructor() {
   }
-
-  ngOnInit() {
-  }
   
   limpiar() {
-    console.log('Limpar')
+    this.medicine = new Medicine;
+    this.dataMedicina.emit(null);
   }
 }

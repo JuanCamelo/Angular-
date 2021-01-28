@@ -19,6 +19,9 @@
     [editorOptions]="{switchedOffText:'NO', switchedOnText:'SI'}">
   </dxi-item>
 
+  <dxi-item [colSpan]="1" itemType="empty" [visible]="medicine.goteo == false">
+  </dxi-item>
+
   <dxi-item [colSpan]="1" dataField="cantidad" [visible]="medicine.goteo" [label]="{ text: 'Cantidad Goteo' }"
     editorType="dxNumberBox" [editorOptions]="{
       showSpinButtons:true, showClearButton:false
@@ -45,8 +48,7 @@
     }">
   </dxi-item>
 
-  <dxi-item [colSpan]="2" itemType="empty" [visible]="medicine.goteo == false">
-  </dxi-item>
+  
 
 
   <dxi-item [colSpan]="4">
@@ -63,13 +65,12 @@
     </div>
   </dxi-item>
 
-  <dxi-item [colSpan]="4" dataField="observacion" [label]="{ text: 'Observaciones' }"
+  <dxi-item [colSpan]="5" dataField="observacion" [label]="{ text: 'Observaciones' }"
     [editorOptions]="{ showClearButton: true}" editorType="dxTextArea">
     <dxi-validation-rule type="required" message="Obsevacion es requerido"></dxi-validation-rule>
   </dxi-item>
 
-  <dxi-item [colSpan]="1" itemType="empty">
-  </dxi-item>
+
 
   <dxi-item [colSpan]="7" itemType="empty">
   </dxi-item>
