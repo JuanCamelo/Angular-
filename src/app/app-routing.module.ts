@@ -18,6 +18,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/infirmary/infirmary.module').then(m => m.InfirmaryModule)
   },
   {
+    path: 'egreso',
+    loadChildren: () => import('./pages/infirmary-egress/infirmary-egress.module').then(m => m.InfirmaryEgressModule)
+  },
+  {
     path: 'redirect-external',
     component: RedirectExternalPageComponent
   },

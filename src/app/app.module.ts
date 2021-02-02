@@ -30,6 +30,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { PatientInfoEffect } from './store/effects/patient-info.effect';
 import { ComponentsModule } from './components/components.module';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,0 +1,118 @@
+<div class="main-content">
+    <div class="container-title">
+        Datos iniciales
+    </div>
+    <div class="container-ida">
+        <form>
+            <dx-form  showColonAfterLabel="false" labelLocation="top" minColWidth="300" #formpregnancy>
+
+                
+                <!-- <dxi-item itemType="group" alignment="bottom" [colSpan]="2" [colCount]="4">
+                <dxi-item [label]="{text:'Fecha de Ingreso'}" dataField="fechaIngreso" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ value: maxDate, max: maxDate, type: 'datetime' }">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item dataField="inicio" editorType="dxRadioGroup" [editorOptions]="radioGroupOption" [label]="{text:'Inicio'}">
+                        <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+                    </dxi-item>
+                </dxi-item>
+                <hr>
+                <dxi-item itemType="group" alignment="bottom" [colCount]="5" caption="Ruptura de membranas anteparto">
+                    <dxi-item editorType="dxSwitch" [label]="{text:'¿La paciente Presenta ruptura de membranas en el anteparto?'}" dataField="rupturamenbrana" [colSpan]="5" [editorOptions]="SwitchRupturaMenbranaption">
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Fecha'}" dataField="fechaRuptura" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana, max: maxDate, type: 'datetime' }">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Dilatación'}" dataField="dilatacion" editorType="dxNumberBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana }">
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Tiempo (min)'}" dataField="tiempoRuptura" editorType="dxNumberBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana }">
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Duración contracciones'}" dataField="duracionContacciones" editorType="dxNumberBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana }">
+                    </dxi-item>
+
+                    <dxi-item editorType="dxSwitch" [label]="{text:'Meconio'}" dataField="Meconio" [editorOptions]="{
+                        disabled: !this.dataForm.rupturamenbrana,
+                        switchedOffText: 'No',
+                        switchedOnText: 'Si'
+                        }">
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group" alignment="bottom" [colCount]="5" caption="Edad gestacional">
+
+                    <dxi-item dataField="fumorEcografia" editorType="dxRadioGroup" [editorOptions]="radioGroupFUMOption" [colSpan]="5" [label]="{text:'Cálculo edad gestacional'}">
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Fecha'}" dataField="fechaEdadgestacional" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{max: maxDate }">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule type="custom" message="La paciente presenta una gestación de más de 42 semanas, verifique la fecha" [validationCallback]="validateRangeDate">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Semanas gestación según ecografía'}" dataField="semanasSegunEcografia" [visible]="dataForm.fumorEcografia == 'Ecografia'" editorType="dxNumberBox" [colSpan]="1">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                        <dxi-validation-rule type="custom" message="La paciente presenta una gestación de más de 42 semanas, verifique la fecha o las semanas de gestación" [validationCallback]="validateRangeNumber">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Semanas'}" dataField="semanasEdadGestacional" editorType="dxTextBox" [colSpan]="1" [editorOptions]="{ disabled: true}">
+                    </dxi-item>
+
+                    <dxi-item dataField="calculoSemanas" editorType="dxRadioGroup" [editorOptions]="radioGroupCalculoSemanasOption" [label]="{text:'Semanas'}">
+                        <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item itemType="group" alignment="bottom" [colSpan]="1" caption="Requiere hospitalización">
+
+                    <dxi-item itemType="group" alignment="bottom" [colSpan]="1">
+                        <dxi-item dataField="inicio" editorType="dxRadioGroup" [editorOptions]=" radioGroupHospitalizacionOption" [label]="{text:'', visible:false }">
+                            <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+                        </dxi-item>
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Observaciones'}" dataField="observacionHospitalizacion" editorType="dxTextArea" [colSpan]="1" [editorOptions]="{ buttons: OthersButtonOH }">
+                    </dxi-item>
+
+                </dxi-item>
+                <dxi-item itemType="group" alignment="bottom" [colCount]="5" caption="Controles Prenatales">
+
+                    <dxi-item editorType="dxSwitch" dataField="controlParental" [colSpan]="5" [editorOptions]="SwitchControlPrenatalOption" [label]="{text:'¿Tiene control prenatal?' }">
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'Fecha de último control prenatal'}" dataField="fechaControlPrenatal" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.controlParental, max: maxDate }">
+                        <dxi-validation-rule type="required" message="Campo requerido">
+                        </dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item dataField="acompañante" editorType="dxSelectBox" [label]="{text:'Acompañante'}" [editorOptions]="{ dataSource: companionList,  
+                                        displayExpr: 'descripcionDTO',  
+                                        valueExpr: 'idDTO',
+                                        searchEnabled: false,
+                                        onSelectionChanged: calculategestationalage,
+                                        disabled: !dataForm.controlParental }">
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                    </dxi-item>
+
+                    <dxi-item [label]="{text:'¿Quién?'}" dataField="diasEdadGestacional" editorType="dxTextBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.controlParental }">
+                    </dxi-item>
+                </dxi-item>
+
+                <dxi-item itemType="group" alignment="bottom" [colCount]="1" caption="Muerte paciente materna">
+                    <dxi-item dataField="muerte" editorType="dxSwitch" [colSpan]="1" [editorOptions]="SwitchMuerte" [label]="{text:'¿Paciente materna fallece en sala de parto?'}">
+                    </dxi-item>
+                    <dxi-item [label]="{text:'Causa de muerte'}" dataField="causaMuerte" editorType="dxTextArea" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.muerte, buttons: OthersButtonCM }">
+                    </dxi-item>
+                    <dxi-item [label]="{text:'Observaciones'}" dataField="observacionMuerte" editorType="dxTextArea" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.muerte, buttons: OthersButtonOM }">
+                    </dxi-item>
+
+                </dxi-item> -->
+            </dx-form>
+        </form>
+    </div>
+</div>
