@@ -1,118 +1,185 @@
-<div class="main-content">
-    <div class="container-title">
-        Datos iniciales
-    </div>
-    <div class="container-ida">
-        <form>
-            <dx-form  showColonAfterLabel="false" labelLocation="top" minColWidth="300" #formpregnancy>
-
-                
-                <!-- <dxi-item itemType="group" alignment="bottom" [colSpan]="2" [colCount]="4">
-                <dxi-item [label]="{text:'Fecha de Ingreso'}" dataField="fechaIngreso" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ value: maxDate, max: maxDate, type: 'datetime' }">
-                        <dxi-validation-rule type="required" message="Campo requerido">
-                        </dxi-validation-rule>
+<div class="dashboard-container">    
+    <!-- Botonera superior -->
+    <div class="grid-content item-c">
+        <div class="main-buttons-list">
+            <div class="item-button" data-toggle="tooltip" data-placement="bottom" [title]="'Guardar'" (click)="onSave()" 
+            [attr.disabled]="disabledSave">
+            <i [style.color]="'#5cb85c'" [class]="isLoading?'fas fa-cog fa-spin':'far fa-save'"></i>
+            <div class="text">Guardar</div>
+            </div>      
+            <div class="item-button" data-toggle="tooltip" data-placement="bottom" [title]="'Generar reporte'" (click)="onGenerateReport()"
+                [attr.disabled]="disabledGenerate">
+                <i [style.color]="'#D2B4DE'" class="far fa-file-alt"></i> 
+                <div class="text">Generar</div> 
+            </div>        
+        </div>   
+    </div> 
+<div class="main-content">    
+    <!-- <div class="container-ida"> -->
+        <form class="pt-4">
+            <dx-form #formEgress [formData]="egressRecord" showColonAfterLabel="false" labelLocation="top" minColWidth="300" > 
+                <dxi-item itemType="group" [colCount]="2" class="title" caption="" > 
+                    <dxi-item [colSpan]="2">
+                        <h3 class="header-klinic">Condición general del paciente</h3>
+                    </dxi-item>                    
+                    <dxi-item dataField="condicionEgreso" [colSpan]="1" editorType="dxSelectBox" 
+                        [editorOptions]="{items:condicionesEgreso,displayExpr:'descripcion', valueExpr:'id',placeholder:'Seleccione una condición ' }">
+                            <dxi-validation-rule  type="required" message="* Seleccione una condición del paciente"></dxi-validation-rule>
+                            <dxo-label text="Condición general del paciente" ></dxo-label> 
                     </dxi-item>
-                    <dxi-item dataField="inicio" editorType="dxRadioGroup" [editorOptions]="radioGroupOption" [label]="{text:'Inicio'}">
-                        <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+                    <dxi-item [colSpan]="1" dataField="otraCondicionEgreso" 
+                        [editorOptions]="{ showClearButton: true}" editorType="dxTextBox">
+                        <dxo-label text="Otro" ></dxo-label> 
+                    </dxi-item>
+                </dxi-item>  
+                <dxi-item itemType="group" [colCount]="2" caption=""> 
+                    <dxi-item [colSpan]="2">
+                        <h3 class="header-klinic">Dispositivos retirados</h3>
+                    </dxi-item>   
+                    <dxi-item [colSpan]="1" dataField="dispositivosRetirados" editorType="dxTagBox"
+                        [editorOptions]="{
+                            items: devicesToRemove, 
+                            displayExpr: 'descripcion',
+                            placeholder: 'Seleccione los dispositivos...',
+                            searchEnabled: true,
+                            showSelectionControls: true,
+                            applyValueMode: 'useButtons'    
+                        }">                  
+                        <dxo-label text="Dispositivos retirados" ></dxo-label>  
+                    </dxi-item>                     
+                    <dxi-item [colSpan]="1" dataField="otroDispositivoRetirado"
+                        [editorOptions]="{showClearButton: true}" 
+                        editorType="dxTextBox">
+                        <dxo-label text="Otro" ></dxo-label> 
+                    </dxi-item>
+                    <dxi-item [colSpan]="2" dataField="observacionDispositivosRetirados" 
+                        [editorOptions]="{showClearButton: true,height:'60px'}"
+                        editorType="dxTextBox">
+                        <dxo-label text="Observación" ></dxo-label> 
+                    </dxi-item>
+                </dxi-item>  
+                <dxi-item itemType="group" [colCount]="2" caption=""> 
+                    <dxi-item [colSpan]="2">
+                        <h3 class="header-klinic">Egreso con dispositivo invasivo</h3>
+                    </dxi-item>   
+                    <dxi-item [colSpan]="1" dataField="dispositivosEgresoEnfermeria" editorType="dxTagBox"
+                        [editorOptions]="{
+                            items: devicesToEgress, 
+                            displayExpr: 'descripcion',
+                            placeholder: 'Seleccione los dispositivos...',
+                            searchEnabled: true,
+                            showSelectionControls: true,
+                            applyValueMode: 'useButtons'    
+                        }">                  
+                        <dxo-label text="Egreso con dispositivos invasivos" ></dxo-label>  
+                    </dxi-item>                     
+                    <dxi-item [colSpan]="1" dataField="otroDispositivo" 
+                        [editorOptions]="{ showClearButton: true}" editorType="dxTextBox">
+                        <dxo-label text="Otro" ></dxo-label> 
+                    </dxi-item>
+                    <dxi-item [colSpan]="2" dataField="observacionOtroDispositivo" 
+                        [editorOptions]="{showClearButton: true,height:'60px'}"
+                        editorType="dxTextBox">
+                        <dxo-label text="Observación"></dxo-label> 
+                    </dxi-item>
+                </dxi-item> 
+                <dxi-item itemType="group" [colCount]="2" caption="">
+                    <dxi-item [colSpan]="2">
+                        <h3 class="header-klinic">Educación (Cuidados)</h3>
+                    </dxi-item>                     
+                    <dxi-item [colSpan]="1" editorType="dxTagBox" dataField="educacion"
+                        [editorOptions]="{
+                            items: optionsEducations, displayExpr: 'descripcion', 
+                            placeholder: 'Seleccione los cuidados...',
+                            searchEnabled: true, showSelectionControls: true,
+                            applyValueMode: 'useButtons'    
+                        }">        
+                        <dxo-label text="Cuidados educativos" ></dxo-label>                       
+                    </dxi-item>
+                    <dxi-item [colSpan]="1" dataField="otroEducacion" 
+                        [editorOptions]="{ showClearButton: true}" editorType="dxTextBox">
+                        <dxo-label text="Otro" ></dxo-label> 
+                     </dxi-item>                      
+                    <dxi-item [colSpan]="2" dataField="observacionEducacion"                     
+                        [editorOptions]="{showClearButton: true,height:'60px'}" editorType="dxTextBox">
+                        <dxo-label text="Observación" ></dxo-label> 
+                    </dxi-item>                  
+                </dxi-item>
+                <dxi-item itemType="group" [colCount]="12">
+                    <dxi-item [colSpan]="4"  class="border border-primary">
+                        <div *dxTemplate>
+                            <dx-check-box  *ngFor="let obj of optionsEducationsForm" [text]="obj.descripcion" #optionsEducation (onValueChanged)="onCheckValueChanged($event.value, obj.id, obj.descripcion)"></dx-check-box>
+                        </div>
+                        <dxo-label text="Forma"></dxo-label>
+                    </dxi-item>
+                    <dxi-item [colSpan]="4" editorType="dxTagBox" dataField="medioSalida"
+                        [editorOptions]="{
+                            items: optionsExitMediums, displayExpr: 'descripcion', 
+                            placeholder: 'Seleccione los medios...',
+                            searchEnabled: true, showSelectionControls: true,
+                            applyValueMode: 'useButtons'    
+                        }">        
+                        <dxo-label text="Medio de salida desde el servicio" ></dxo-label>                      
+                    </dxi-item>
+                    <dxi-item editorType="dxSwitch" [colSpan]="3" dataField="verificacionPertenencias"
+                    [editorOptions]="{switchedOffText:'No', switchedOnText:'Sí'}">
+                        <dxo-label text="Verificación entrega de pertenencias"></dxo-label>
+                        <div *dxTemplate>
+                            <dx-switch [value]="false" switchedOffText="No" switchedOnText="Sí"></dx-switch>
+                        </div>
+                    </dxi-item>  
+                </dxi-item>  
+                <dxi-item itemType="group" [colCount]="1">
+                    <dxi-item [colSpan]="1" dataField="observacionGeneral"                     
+                        [editorOptions]="{ showClearButton: true,height:'80px'}" editorType="dxTextBox">
+                        <dxo-label text="Observaciones generales"></dxo-label>
                     </dxi-item>
                 </dxi-item>
-                <hr>
-                <dxi-item itemType="group" alignment="bottom" [colCount]="5" caption="Ruptura de membranas anteparto">
-                    <dxi-item editorType="dxSwitch" [label]="{text:'¿La paciente Presenta ruptura de membranas en el anteparto?'}" dataField="rupturamenbrana" [colSpan]="5" [editorOptions]="SwitchRupturaMenbranaption">
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Fecha'}" dataField="fechaRuptura" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana, max: maxDate, type: 'datetime' }">
-                        <dxi-validation-rule type="required" message="Campo requerido">
-                        </dxi-validation-rule>
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Dilatación'}" dataField="dilatacion" editorType="dxNumberBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana }">
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Tiempo (min)'}" dataField="tiempoRuptura" editorType="dxNumberBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana }">
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Duración contracciones'}" dataField="duracionContacciones" editorType="dxNumberBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.rupturamenbrana }">
-                    </dxi-item>
-
-                    <dxi-item editorType="dxSwitch" [label]="{text:'Meconio'}" dataField="Meconio" [editorOptions]="{
-                        disabled: !this.dataForm.rupturamenbrana,
-                        switchedOffText: 'No',
-                        switchedOnText: 'Si'
-                        }">
-                    </dxi-item>
-                </dxi-item>
-                <dxi-item itemType="group" alignment="bottom" [colCount]="5" caption="Edad gestacional">
-
-                    <dxi-item dataField="fumorEcografia" editorType="dxRadioGroup" [editorOptions]="radioGroupFUMOption" [colSpan]="5" [label]="{text:'Cálculo edad gestacional'}">
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Fecha'}" dataField="fechaEdadgestacional" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{max: maxDate }">
-                        <dxi-validation-rule type="required" message="Campo requerido">
-                        </dxi-validation-rule>
-                        <dxi-validation-rule type="custom" message="La paciente presenta una gestación de más de 42 semanas, verifique la fecha" [validationCallback]="validateRangeDate">
-                        </dxi-validation-rule>
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Semanas gestación según ecografía'}" dataField="semanasSegunEcografia" [visible]="dataForm.fumorEcografia == 'Ecografia'" editorType="dxNumberBox" [colSpan]="1">
-                        <dxi-validation-rule type="required" message="Campo requerido">
-                        </dxi-validation-rule>
-                        <dxi-validation-rule type="custom" message="La paciente presenta una gestación de más de 42 semanas, verifique la fecha o las semanas de gestación" [validationCallback]="validateRangeNumber">
-                        </dxi-validation-rule>
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Semanas'}" dataField="semanasEdadGestacional" editorType="dxTextBox" [colSpan]="1" [editorOptions]="{ disabled: true}">
-                    </dxi-item>
-
-                    <dxi-item dataField="calculoSemanas" editorType="dxRadioGroup" [editorOptions]="radioGroupCalculoSemanasOption" [label]="{text:'Semanas'}">
-                        <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
-                    </dxi-item>
-                </dxi-item>
-                <dxi-item itemType="group" alignment="bottom" [colSpan]="1" caption="Requiere hospitalización">
-
-                    <dxi-item itemType="group" alignment="bottom" [colSpan]="1">
-                        <dxi-item dataField="inicio" editorType="dxRadioGroup" [editorOptions]=" radioGroupHospitalizacionOption" [label]="{text:'', visible:false }">
-                            <dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
-                        </dxi-item>
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Observaciones'}" dataField="observacionHospitalizacion" editorType="dxTextArea" [colSpan]="1" [editorOptions]="{ buttons: OthersButtonOH }">
-                    </dxi-item>
-
-                </dxi-item>
-                <dxi-item itemType="group" alignment="bottom" [colCount]="5" caption="Controles Prenatales">
-
-                    <dxi-item editorType="dxSwitch" dataField="controlParental" [colSpan]="5" [editorOptions]="SwitchControlPrenatalOption" [label]="{text:'¿Tiene control prenatal?' }">
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'Fecha de último control prenatal'}" dataField="fechaControlPrenatal" editorType="dxDateBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.controlParental, max: maxDate }">
-                        <dxi-validation-rule type="required" message="Campo requerido">
-                        </dxi-validation-rule>
-                    </dxi-item>
-
-                    <dxi-item dataField="acompañante" editorType="dxSelectBox" [label]="{text:'Acompañante'}" [editorOptions]="{ dataSource: companionList,  
-                                        displayExpr: 'descripcionDTO',  
-                                        valueExpr: 'idDTO',
-                                        searchEnabled: false,
-                                        onSelectionChanged: calculategestationalage,
-                                        disabled: !dataForm.controlParental }">
-                        <dxi-validation-rule type="required"></dxi-validation-rule>
-                    </dxi-item>
-
-                    <dxi-item [label]="{text:'¿Quién?'}" dataField="diasEdadGestacional" editorType="dxTextBox" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.controlParental }">
-                    </dxi-item>
-                </dxi-item>
-
-                <dxi-item itemType="group" alignment="bottom" [colCount]="1" caption="Muerte paciente materna">
-                    <dxi-item dataField="muerte" editorType="dxSwitch" [colSpan]="1" [editorOptions]="SwitchMuerte" [label]="{text:'¿Paciente materna fallece en sala de parto?'}">
-                    </dxi-item>
-                    <dxi-item [label]="{text:'Causa de muerte'}" dataField="causaMuerte" editorType="dxTextArea" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.muerte, buttons: OthersButtonCM }">
-                    </dxi-item>
-                    <dxi-item [label]="{text:'Observaciones'}" dataField="observacionMuerte" editorType="dxTextArea" [colSpan]="1" [editorOptions]="{ disabled: !dataForm.muerte, buttons: OthersButtonOM }">
-                    </dxi-item>
-
-                </dxi-item> -->
             </dx-form>
         </form>
-    </div>
+    <!-- Rejillas -->
+
+    <h4 class="title-content mt-3">Ordenes médicas</h4>
+    <dx-data-grid id="gridContainer" [dataSource]="orders" [showBorders]="true"
+      [showRowLines]="true" [remoteOperations]="true" [hoverStateEnabled]="true" [elementAttr]="{ id: gridOrder }"
+      ophGridHeaderColor ophGridHeaderTextColor (onContentReady)="onContentReady($event)">
+    
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[8, 12, 20]"></dxo-pager>
+    
+      <dxi-column caption="Estado" dataField="estadoOrdenMedica" dataType="string" alignment="center"></dxi-column>
+      <dxi-column caption="Número de orden"  dataField="idnumerico" dataType="number" alignment="center"></dxi-column>
+      <dxi-column caption="Fecha" dataField="fechaHora" dataType="datetime" alignment="center" alignment="center"></dxi-column>
+      <dxi-column caption="Tipo de orden" dataField="tipoOrdenMedica"  dataType="string" alignment="center"></dxi-column>
+      <dxi-column caption="Especialista que ordena" dataField="personalAsistencialOrdena"  dataType="string" alignment="center" cellTemplate="PersonalTemplate">
+          
+       <div *dxTemplate="let data of 'PersonalTemplate'">
+        {{data.data.personalAsistencialOrdena.nombrePrimer}} {{data.data.personalAsistencialOrdena.nombreSegundo}}
+        {{data.data.personalAsistencialOrdena.apellidoPrimer}} {{data.data.personalAsistencialOrdena.apellidoSegundo}}
+    </div> 
+      </dxi-column>
+    </dx-data-grid>    
+    <br>    
+    <h4 class="title-content mt-3">Medicamentos</h4>
+    <dx-data-grid id="gridMedicines" [dataSource]="medicines" [showBorders]="true"
+      [showRowLines]="true" [remoteOperations]="true" [hoverStateEnabled]="true" [elementAttr]="{ id: gridMedicines }"
+      ophGridHeaderColor ophGridHeaderTextColor (onContentReady)="onContentReady($event)" class="mb-3">    
+
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+      <dxo-paging [pageSize]="10"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[8, 12, 20]"></dxo-pager>  
+
+      <dxi-column caption="Estado" dataField="estadoOrden" dataType="string" alignment="center" width='150'></dxi-column>
+      <dxi-column caption="Número de orden"  dataField="idNumerico" dataType="string" alignment="center" width='150'></dxi-column>
+      <dxi-column caption="Fecha" dataField="fechaHora" dataType="datetime" alignment="center" alignment="center" width='150'></dxi-column>
+      <dxi-column caption="Tipo de medicamento" dataField="medicamento" dataType="string" alignment="center"></dxi-column>
+      <dxi-column caption="Dosis" dataField="dosis" dataType="string" alignment="center" width='100'></dxi-column>
+      <dxi-column caption="Cantidad" dataField="cantidadEntregarFarmacia" dataType="string" alignment="center" width='100'></dxi-column>
+      <dxi-column caption="Especialista que ordena" dataField="nombrePersonalAsistencial" dataType="string" alignment="center" width='250'></dxi-column>
+    </dx-data-grid>
+    <br>   
+</div>
 </div>
