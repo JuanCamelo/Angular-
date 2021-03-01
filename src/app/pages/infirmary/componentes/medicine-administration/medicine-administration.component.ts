@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Medicine } from '../../models/medicine';
+import { MedicalAdministrationDTO } from '../../models/MedicalAdministrationDTO';
 
 @Component({
   selector: 'oph-medicine-administration',
@@ -8,7 +8,7 @@ import { Medicine } from '../../models/medicine';
 })
 export class MedicineAdministrationComponent implements OnInit {
 
-  medicine: Medicine;
+  medicine: MedicalAdministrationDTO;
 
   constructor() {
   }
