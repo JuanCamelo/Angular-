@@ -58,7 +58,7 @@ export class MedicineTableComponent implements OnInit {
   ngOnInit() {
     this.gridId = this.medicineService.generateUuid();
 
-    this.medicineService.GetMedicalAdministration("D5B13EEF-617A-4361-A924-3BA6C31368D8").subscribe(response => {
+    this.medicineService.GetMedicalAdministration("CA59E04B-6878-4118-AF50-5D2112766C8B").subscribe(response => {
       this.medicines = response
 
       console.log(this.medicines);
@@ -73,7 +73,7 @@ export class MedicineTableComponent implements OnInit {
       IdNumeroOrdenMedicaDTO: e.data.ordenMedica,
       EstadoDTO: e.data.estado,
       FechaFormulaDTO: e.data.fechaFormula,
-      FechaAplicacion: new Date(Date.now()),
+      FechaAplicacion: e.data.fechaAplicacion,
       HoraAplicacion: new Date(Date.now()),
       MedicamentoDTO: e.data.medicamento,
       ConcentracionDTO: e.data.concentracion,
@@ -91,7 +91,8 @@ export class MedicineTableComponent implements OnInit {
       UnidadMedidaSuministroAdministradoDTO:'',
       UnidadPresentacionDTO:'',
       GoteroDTO:false,
-      CantidadGotasDTO:''
+      CantidadGotasDTO:'',
+      IdPlanActividadesEnfermeriaDTO: e.data.idPlanActividadesEnfermeriaDTO
       //goteo: true,
     }
     this.dataMedicina.emit(this.medicine);

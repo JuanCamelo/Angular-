@@ -12,8 +12,8 @@ export class MedicalAdministrationDTO {
     //goteo?: boolean;
     FrecuenciaDTO: string;
     FrecuenciaDescripcionDTO: string;
-    FechaAplicacion?:Date;
-    HoraAplicacion?:Date;
+    FechaAplicacion: string;
+    HoraAplicacion:Date;
     //unidadDeMedida?: string;
     CantidadDTO: number;
     ObservacionDTO: string;
@@ -23,6 +23,7 @@ export class MedicalAdministrationDTO {
     UnidadPresentacionDTO: string;
     GoteroDTO: boolean;
     CantidadGotasDTO: string;
+    IdPlanActividadesEnfermeriaDTO: string;
     //fechaAplicacion: Date;
 
 }

@@ -20,7 +20,7 @@ export class MedicineFormComponent {
     IdNumeroOrdenMedicaDTO: null,
     EstadoDTO: '',
     FechaFormulaDTO: null,
-    FechaAplicacion: new Date(Date.now()),
+    FechaAplicacion: '',
     HoraAplicacion: new Date(Date.now()),
     MedicamentoDTO: '',
     ConcentracionDTO: '',
@@ -38,8 +38,12 @@ export class MedicineFormComponent {
     UnidadMedidaSuministroAdministradoDTO:'',
     UnidadPresentacionDTO:'',
     GoteroDTO: false,
-    CantidadGotasDTO:''
+    CantidadGotasDTO:'',
+    IdPlanActividadesEnfermeriaDTO: ''
   };
+
+
+
   currentDate = new Date(Date.now());
   unidadesDeMedida = ['Ampolla', 'Tableta','Frasco','Caja','Otro'];
   priorities: string[] = ['Botiquin', 'Farmacia', 'Dispensación automatica'];
@@ -50,6 +54,8 @@ export class MedicineFormComponent {
   }
 
   ngOnInit(): void {
+
+  
 
     this.medicineService.GetPresentacionSuministro().subscribe(response => {
       this.UnidadPresentacionList = response;
@@ -62,7 +68,7 @@ export class MedicineFormComponent {
     e.preventDefault();
 
     const result = confirm(
-      "¿Está seguro de guardar?", "Remisión"
+      "¿Está seguro de guardar?", "Administración de medicamentos"
     );
 
     result.then((dialogResult) => {
@@ -70,6 +76,7 @@ export class MedicineFormComponent {
         return;
       }
       else {
+
 
         this.medicineService.SaveMedicalAdministration(this.medicine).subscribe(response => {
           this.dataMedicina = response    

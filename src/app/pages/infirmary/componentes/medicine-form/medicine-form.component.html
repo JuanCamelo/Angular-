@@ -6,10 +6,10 @@
     [readOnly]="false">
 
     <dxi-item [colSpan]="2" dataField="FechaAplicacion" editorType="dxDateBox" [label]="{ text: 'Fecha Aplicación' }"
-      [editorOptions]="{ width: '100%', showClearButton: true, max:currentDate}"></dxi-item>
+      [editorOptions]="{ width: '100%', showClearButton: true, max:currentDate, displayFormat: 'yyyy-MM-dd'}"></dxi-item>
 
     <dxi-item [colSpan]="2" dataField="HoraAplicacion" editorType="dxDateBox" [label]="{ text: 'Hora Aplicación' }"
-      [editorOptions]="{ width: '100%', showClearButton: true, type: 'time', max:currentDate}">
+      [editorOptions]="{ width: '100%', showClearButton: true, type: 'time', max:currentDate }">
       <!-- <dxi-validation-rule type="range"  [max]="currentDate" message="La hora no de ser superior a la actual"></dxi-validation-rule> -->
     </dxi-item>
     <!-- Este campo no es Editable -->
