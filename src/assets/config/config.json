@@ -1,5 +1,5 @@
 {
-    "urlApi": "https://localhost:44381/api/",
+    "urlApi": "https://factorydev.digitalwaresaas.com.co:8085/klinicapi/api/",
     "klinicApi": "https://factorydev.digitalwaresaas.com.co:8085/klinicapi/api/",
     "urlApolo": "https://factorydev.digitalwaresaas.com.co:8085/Apolo/#/redirect-external",
     "urlSSBApi": "https://factorydev.digitalwaresaas.com.co:8085/AgoraApi/api",
