@@ -1,0 +1,95 @@
+<div *ngFor="let data of tableroBoard">
+    <!-- bloque de codigo header informacion del paciente -->
+    <div class="header">
+        <div class="header-container">
+            <samp>Sucursal: <label>{{data.sucursal}} </label> </samp>
+            <samp>Piso: <label>{{data.piso}}</label> </samp>
+            <samp>Habitacion/cama: <label>{{data.cama}} </label> </samp>
+            <samp>Servicio: <label>{{data.servicio}} </label> </samp>
+            <samp>Tipo documento: <label>{{data.tdocumento}} </label> </samp>
+            <samp>N° Documentos: <label>{{data.noDocumento}} </label> </samp>
+            <samp>Nombre-apellido: <label>{{data.paciente}} </label> </samp>
+            <samp>Edad: <label>{{data.edad}} </label> </samp>
+            <samp>Diagnostico: <label>{{data.diagnostico}} </label> </samp>
+            <samp>Previcion: <label>{{data.prevension}} </label> </samp>
+            <samp>Plan: <label>{{data.plan}} </label> </samp>
+        </div>
+    </div>
+    <!-- bloque body farmacia-hospilataria -->
+    <dx-box direction="col" width="100%" [height]="160">
+        <dxi-item [ratio]="2" [baseSize]="0">
+            <dx-box direction="row" width="100%" [height]="160">
+                <dxi-item [ratio]="1.5">
+                    <!-- bloque de panel izquierdo -->
+                    <div class="body-card">
+                        <h6>MEDICAMENTOS Y/O DISPOSITIVOS MEDICOS</h6>
+                        <!-- bloque de codigo convenciones -->
+                        <div class="body-item" *ngFor="let status of medicalStatus">
+                            <i class="fas fa-circle" [ngStyle]="{'color': status.color ||'black'}"></i>
+                            <span style="font-size: 12px;">{{status.descripcion || 'texto'}}</span>
+                        </div>
+                        <div class="line"></div>
+                        <!-- bloque de listado de medicamentos  -->
+                        <div class="title-m" *ngFor="let medi of Rmedicamentos; let i = index">
+                            <samp>{{medi.descripcion}}</samp>
+                            <div class="title-d" *ngFor="let item of medi.items">
+                                <div class="spam"><span>{{item.descripcion}}</span></div>
+                            </div>
+                        </div>
+                        <div class="line"></div>
+                        <!-- bloque de Insumos adicionales -->
+                        <div class="body-add">
+                            <i class="fas fa-edit" (click)="onActionAddform(isAddForm)"></i>
+                            <h5>INSUMOS ADICIONALES </h5>
+                        </div>
+                        <!-- bloque de codigo boton adicionar -->
+                        <div class="grid-content">
+                            <div class="main-buttons-list">
+                                <div class="item-button" data-toggle="tooltip" data-placement="bottom"
+                                    title="Adiccionar" (click)="onActionClickSutmit($event)">
+                                    <div class="text-button">Adicionar</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </dxi-item>
+                <dxi-item [ratio]="5">
+                    <!-- componentes panel panel derecho  -->
+                </dxi-item>
+            </dx-box>
+        </dxi-item>
+    </dx-box>
+</div>
+
+<!--bloque de codigo del pop-pu -->
+<dx-popup [width]="439" height="auto" [showTitle]="true" title="Ordenes Insumos" [dragEnabled]="false"
+    [closeOnOutsideClick]="true" [(visible)]="bedSelectModalVisible">
+    <div>
+        <!-- bloque de codigo body pop-pu -->
+        <form>
+            <dx-form showColonAfterLabel="true" labelLocation="top" minColWidth="300" #form>
+                 <dxi-item itemType="group" alignment="bottom" [colCount]="4">
+                     <dxi-item [colSpan]="3" editorType="dxSelectBox" [label]="{text:'Insumos'}" dataField="IdSuministro"
+                        [editorOptions]="{ dataSource:'this.products', displayExpr:'Name',valueExpr:'ID',
+                        searchEnabled: true}">
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                    </dxi-item>
+                    <dxi-item [colSpan]="1" dataField="" [label]="{text:'Cantidad'}">
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                    </dxi-item>
+                </dxi-item>
+                <dxi-item editorType="dxTextArea" [height]="300" [label]="{ text: 'Observaciónes' }" dataField=""
+                    [editorOptions]="{ }">
+                </dxi-item>                
+                <dxi-item [colSpan]="1" itemType="button" [buttonOptions]="{                      
+                        text: 'Agregar',
+                        type: 'success',
+                        hoverStateEnabled:'true',
+                        alignment: 'right',
+                        useSubmitBehavior: true,
+                        width:'30%'}" verticalAlignment="bottom">
+                </dxi-item>                
+            </dx-form>
+        </form>
+    </div>
+</dx-popup>
