@@ -15,7 +15,7 @@ const routes: Routes = [
     component: HospitalPharmacyComponent,
     children: [
       {
-        path: 'dispensacion',
+        path: 'dispensacion/:orden',
         component: PharmacyComponent,
       },
       {

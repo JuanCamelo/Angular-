@@ -80,7 +80,7 @@ export class MedicineFormComponent {
 
         this.medicineService.SaveMedicalAdministration(this.medicine).subscribe(response => {
           this.dataMedicina = response    
-          console.log(this.dataMedicina);        
+          //console.log(this.dataMedicina);        
         });
 
       }

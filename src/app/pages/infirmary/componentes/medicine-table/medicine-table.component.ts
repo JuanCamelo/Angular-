@@ -61,7 +61,7 @@ export class MedicineTableComponent implements OnInit {
     this.medicineService.GetMedicalAdministration("CA59E04B-6878-4118-AF50-5D2112766C8B").subscribe(response => {
       this.medicines = response
 
-      console.log(this.medicines);
+     // console.log(this.medicines);
     
     });
   }
