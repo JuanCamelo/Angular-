@@ -34,7 +34,7 @@
 
 
   .body-card{
-    margin-top: 0.9em;
+    margin-top: -1.5em;
     border: 1px solid #838485;
     border-radius: 12px;
     h6{
@@ -56,8 +56,10 @@
             font-size: 12px;
             font-weight: 700;
         }
-        .title-d{           
+        .title-d{  
+            margin-top: 1em;         
             margin-left: 3px;
+            margin-bottom: 1em;
             .spam{
                 display: inherit;
                 text-align: initial;

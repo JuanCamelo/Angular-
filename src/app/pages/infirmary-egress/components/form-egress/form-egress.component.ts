@@ -85,7 +85,7 @@ export class FormEgressComponent implements OnInit {
     .subscribe((response) => {
       if (response !== undefined) {
         this.orders=response;
-        console.log(this.orders);
+        //console.log(this.orders);
        // this.egressRecord.personalAsistenciaRegistra=response.idDTO;
       }
     });
@@ -96,8 +96,8 @@ export class FormEgressComponent implements OnInit {
     .subscribe((response) => {
       if (response !== undefined) {
         this.medicines=response;
-        console.log('###################################################')
-        console.log(this.medicines);      
+        //console.log('###################################################')
+        //console.log(this.medicines);      
       }
     });
   }

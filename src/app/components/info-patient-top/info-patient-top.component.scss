@@ -1,5 +1,5 @@
 .cssHeight {
-    height: 125px;
+    //height: 125px;
 }
 
 .global-container {
@@ -78,7 +78,8 @@
     width: 50%;
     display: flex;
     .line-vertical{
+        background-color: red;
         border-left: 0.1px solid rgb(87, 84, 84);
-         height: 100px;
+         //height: 100px;
     }
 }

@@ -1,4 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { throwError } from 'rxjs';
+import { catchError, map, retry } from 'rxjs/operators';
+import { RequestResult } from 'src/app/models/request-result';
+import { ConfigService } from 'src/app/services/config.service';
+import { SharedService } from 'src/app/services/shared.service';
+import { ResolveRequestResultService } from 'src/app/utils/resolve-requestResult';
 
 export class datospaciente {
   sucursal: string;
@@ -12,202 +20,44 @@ export class datospaciente {
   diagnostico: string;
   prevension: string;
   plan: string;
-  hospitalaria:string;
+  hospitalaria: string;
 }
-export class StatusM
-{
-  color:string;
-  descripcion: string;  
+export class StatusM {
+  color: string;
+  descripcion: string;
 }
 export class Medicamentos {
- id:number;
- descripcion:string;
- items:{descripcion:string}[]
-
+  id: number;
+  descripcion: string;
+  items: { descripcion: string }[]
 }
 
-export class Product {
-  ID: number;
-  Name: string;
-  Price: number;
-  Current_Inventory: number;
-  Backorder: number;
-  Manufacturing: number;
-  Category: string;
-  ImageSrc: string;
-}
-
-let products: Product[] = [{
-  ID: 1,
-  Name: "HD Video Player",
-  Price: 330,
-  Current_Inventory: 225,
-  Backorder: 0,
-  Manufacturing: 10,
-  Category: "Video Players",
-  ImageSrc: "images/products/1.png"
-}, {
-  ID: 3,
-  Name: "SuperPlasma 50",
-  Price: 2400,
-  Current_Inventory: 0,
-  Backorder: 0,
-  Manufacturing: 0,
-  Category: "Televisions",
-  ImageSrc: "images/products/3.png"
-}, {
-  ID: 4,
-  Name: "SuperLED 50",
-  Price: 1600,
-  Current_Inventory: 77,
-  Backorder: 0,
-  Manufacturing: 55,
-  Category: "Televisions",
-  ImageSrc: "images/products/4.png"
-}, {
-  ID: 5,
-  Name: "SuperLED 42",
-  Price: 1450,
-  Current_Inventory: 445,
-  Backorder: 0,
-  Manufacturing: 0,
-  Category: "Televisions",
-  ImageSrc: "images/products/5.png"
-}, {
-  ID: 6,
-  Name: "SuperLCD 55",
-  Price: 1350,
-  Current_Inventory: 345,
-  Backorder: 0,
-  Manufacturing: 5,
-  Category: "Televisions",
-  ImageSrc: "images/products/6.png"
-}, {
-  ID: 7,
-  Name: "SuperLCD 42",
-  Price: 1200,
-  Current_Inventory: 210,
-  Backorder: 0,
-  Manufacturing: 20,
-  Category: "Televisions",
-  ImageSrc: "images/products/7.png"
-}, {
-  ID: 8,
-  Name: "SuperPlasma 65",
-  Price: 3500,
-  Current_Inventory: 0,
-  Backorder: 0,
-  Manufacturing: 0,
-  Category: "Televisions",
-  ImageSrc: "images/products/8.png"
-}, {
-  ID: 9,
-  Name: "SuperLCD 70",
-  Price: 4000,
-  Current_Inventory: 95,
-  Backorder: 0,
-  Manufacturing: 5,
-  Category: "Televisions",
-  ImageSrc: "images/products/9.png"
-}, {
-  ID: 10,
-  Name: "DesktopLED 21",
-  Price: 175,
-  Current_Inventory: null,
-  Backorder: 425,
-  Manufacturing: 75,
-  Category: "Monitors",
-  ImageSrc: "images/products/10.png"
-}, {
-  ID: 12,
-  Name: "DesktopLCD 21",
-  Price: 170,
-  Current_Inventory: 210,
-  Backorder: 0,
-  Manufacturing: 60,
-  Category: "Monitors",
-  ImageSrc: "images/products/12.png"
-}, {
-  ID: 13,
-  Name: "DesktopLCD 19",
-  Price: 160,
-  Current_Inventory: 150,
-  Backorder: 0,
-  Manufacturing: 210,
-  Category: "Monitors",
-  ImageSrc: "images/products/13.png"
-}, {
-  ID: 14,
-  Name: "Projector Plus",
-  Price: 550,
-  Current_Inventory: null,
-  Backorder: 55,
-  Manufacturing: 10,
-  Category: "Projectors",
-  ImageSrc: "images/products/14.png"
-}, {
-  ID: 15,
-  Name: "Projector PlusHD",
-  Price: 750,
-  Current_Inventory: 110,
-  Backorder: 0,
-  Manufacturing: 90,
-  Category: "Projectors",
-  ImageSrc: "images/products/15.png"
-}, {
-  ID: 17,
-  Name: "ExcelRemote IR",
-  Price: 150,
-  Current_Inventory: 650,
-  Backorder: 0,
-  Manufacturing: 190,
-  Category: "Automation",
-  ImageSrc: "images/products/17.png"
-}, {
-  ID: 18,
-  Name: "ExcelRemote BT",
-  Price: 180,
-  Current_Inventory: 310,
-  Backorder: 0,
-  Manufacturing: 0,
-  Category: "Automation",
-  ImageSrc: "images/products/18.png"
-}, {
-  ID: 19,
-  Name: "ExcelRemote IP",
-  Price: 200,
-  Current_Inventory: 0,
-  Backorder: 325,
-  Manufacturing: 225,
-  Category: "Automation",
-  ImageSrc: "images/products/19.png"
-}];
 
 
 
 let medicamentos =
-[
-  { 
-    id:1, descripcion:"INDICACION 307",
-      items:[
-              { descripcion:"Diclofenalco 100gr"},
-              { descripcion:"Paracetamol 400gr"},
-              { descripcion:"Ibuprofeno 800gr"},
-            ]
-  }
-  
-]
+  [
+    {
+      id: 1, descripcion: "INDICACION 307",
+      items: [
+        { descripcion: "Diclofenalco 100gr" },
+        { descripcion: "Paracetamol 400gr" },
+        { descripcion: "Ibuprofeno 800gr" },
+      ]
+    }
+
+  ]
 
 let statusM =
-[
-  {color: "red",descripcion:"Estupefaciente"},
-  {color: "#DED8DE",descripcion:"Psicotrópico"},
-  {color: "#E065E8",descripcion:"Antibiotico"}
-]
+  [
+    { color: "red", descripcion: "Estupefaciente" },
+    { color: "#DED8DE", descripcion: "Psicotrópico" },
+    { color: "#E065E8", descripcion: "Antibiotico" }
+  ]
 
 let Datospaciente = [
   {
-    sucursal:"Indilsa Chile",
+    sucursal: "Indilsa Chile",
     piso: "2",
     cama: "205",
     servicio: "Urgencias",
@@ -218,7 +68,7 @@ let Datospaciente = [
     diagnostico: "Abdomen agudo",
     prevension: "Plan medico",
     plan: "Pleno 81",
-    hospitalaria:"Hospitalaria"
+    hospitalaria: "Hospitalaria"
   }
 ]
 
@@ -228,18 +78,42 @@ let Datospaciente = [
 })
 export class ServicePharmacyService {
 
-  _getPatiente():datospaciente[]{
-    return Datospaciente;
-  }
-  _getMedicamentos():StatusM[]{
-    return statusM;
-  }
-  _getRMedicamento():Medicamentos[]{
-    return medicamentos;
-  }
-  _getProdut():Product[]{
-    return products;
+  urlApi: string;
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService,
+    private sharedService: SharedService,
+    private resolveRequestResultService: ResolveRequestResultService
+  ) {
+    this.urlApi = configService.config.urlApi;
   }
 
-  constructor() { }
+  _getInfoPatient(ordenId: string) {
+    this.sharedService.showLoader(true)
+    return this.http.get<RequestResult<any>>(`${this.urlApi}Farmacia/getDispatchPharmacy?ordenId=${ordenId}`)
+      .pipe(retry(0), catchError(this.resolveRequestResultService.handleError), map((response) => {
+        this.sharedService.showLoader(false)
+        return this.resolveRequestResultService.resolve(response);
+      }));
+  }
+
+  _getListInsumos(descripcion : string){
+    this.sharedService.showLoader(true)
+    return this.http.get<RequestResult<any[]>>(`${this.urlApi}Farmacia/getListInsumosPharmacyH`, { params: { descripcion } })
+      .pipe(retry(0), catchError(this.resolveRequestResultService.handleError), map((response) => {
+        this.sharedService.showLoader(false)
+        return this.resolveRequestResultService.resolve(response);
+      }));
+  }
+
+  //getlist de pruebas 
+  _getPatiente(): datospaciente[] {
+    return Datospaciente;
+  }
+  _getMedicamentos(): StatusM[] {
+    return statusM;
+  }
+  _getRMedicamento(): Medicamentos[] {
+    return medicamentos;
+  }
 }

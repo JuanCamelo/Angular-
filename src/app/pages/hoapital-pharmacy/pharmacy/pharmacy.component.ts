@@ -1,7 +1,11 @@
 import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute} from "@angular/router"
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { DxTextBoxComponent } from 'devextreme-angular';
-import { ServicePharmacyService , datospaciente, StatusM, Medicamentos, Product} from "../service/service-pharmacy.service"
+import { PatienteDTO } from "../models/patientDTO";
+import * as settings from "../../../../assets/helpers/global-settings.json";
+import { ServicePharmacyService , datospaciente, StatusM, Medicamentos} from "../service/service-pharmacy.service"
+import { from } from 'rxjs';
 
 
 
@@ -11,29 +15,69 @@ import { ServicePharmacyService , datospaciente, StatusM, Medicamentos, Product}
   styleUrls: ['./pharmacy.component.scss']
 })
 export class PharmacyComponent implements OnInit {
+  existPatien = false;
   public bedSelectModalVisible = false;
   public isAddForm = false;
-  public tableroBoard: datospaciente[];
+  public infoPatient: PatienteDTO[];
   public medicalStatus : StatusM[];
-  public Rmedicamentos : Medicamentos[];
-  public products: Product[];
+  public ordenSuministro : any[];
+  public isumosList:any [];
+
+  public formDataRequest = {
+    idInsumo:'',
+    cantidad:'',
+    descripcion:''
+  }
+  /////vefificar si estan en uso estas varuiables
+  public products: any []
   public product:any= [];
   public timeoutCounter;
-  @ViewChild("filterTxt") filterMedicineTextBox: DxTextBoxComponent;
-
-  
-
+  @ViewChild("selectboxSearch") filterMedicineTextBox: DxTextBoxComponent;
 
   constructor
   (
-    private service : ServicePharmacyService
+    private route: ActivatedRoute,
+    private servicePharmacy : ServicePharmacyService
   ) 
-  { 
-    this.products = this.service._getProdut();
-    this.tableroBoard = this.service._getPatiente();
-    this.medicalStatus = this.service._getMedicamentos();
-    this.Rmedicamentos = this.service._getRMedicamento();    
+  { this.medicalStatus = this.servicePharmacy._getMedicamentos();}
+
+  private _getListLender() {
+    const params =this.route.snapshot.paramMap.get('orden');
+    this.servicePharmacy._getInfoPatient(params).subscribe((response: any) => {
+      if (!response.isValid) {
+        this.infoPatient = [...response]  
+        this.ordenSuministro =[...response.listOrdenMedica]           
+      }
+    });    
+  };
+
+  //filto de isumos 
+  onFilterKeyDownV2(e) {
+    clearTimeout(this.timeoutCounter);
+      const value = this.filterMedicineTextBox.text;    
+      this.timeoutCounter = setTimeout(() => {
+        if (value.length >= settings.minFilterCharacters) {
+          this.servicePharmacy._getListInsumos(value).subscribe(response => {     
+              this.isumosList = response;         
+          })
+        }
+      }, 1000);
   }
+  
+  //formulario de isumos adicionales 
+  onAddIsumoFormSubmit(e){
+    e.preventDefault()
+    console.log(this.formDataRequest,"formulario")
+  }
+
+  //funcion sutmit filtro
+  selectProcedure(event){
+    console.log(event,"hola das")
+  }
+
+
+  ///limpiar codigo hacia abajo
+
 
   onActionClickSutmit(e){
     
@@ -49,34 +93,15 @@ export class PharmacyComponent implements OnInit {
   }
   onActionAddform(e){  }
 
- 
 
-
-  onFilterKeyDown(e){  
-    clearTimeout(this.timeoutCounter);
-    const value = this.filterMedicineTextBox.text;    
-    this.timeoutCounter = setTimeout(() => {
-       if(value.length >= 3){   
-          let data :Product[] = this.service._getProdut();
-           console.log(data) 
-        return data;
-      }
-     }, 1000);
-  }
 
  
-
-
-
-
-  formDataRequest ={
-    descripcion: ""
-  }
     
   
 
 
   ngOnInit() {
+    this._getListLender();
   }
 
 }
