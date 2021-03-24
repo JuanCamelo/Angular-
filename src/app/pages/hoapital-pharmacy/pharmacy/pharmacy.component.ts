@@ -65,14 +65,13 @@ export class PharmacyComponent implements OnInit {
   }
   
   //formulario de isumos adicionales 
-  onAddIsumoFormSubmit(e){
-    e.preventDefault()
-    console.log(this.formDataRequest,"formulario")
+  onAddIsumoFormSubmit(e:any){
+        e.preventDefault(); 
+          
   }
 
   //funcion sutmit filtro
   selectProcedure(event){
-    console.log(event,"hola das")
   }
 
 
