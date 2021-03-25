@@ -1,4 +1,4 @@
-    <oph-info-patient-top  [patient]="infoPatient"></oph-info-patient-top>
+    <oph-patient-info  [patient]="infoPatient"></oph-patient-info>
     <!-- bloque body farmacia-hospilataria -->
     <dx-box direction="col" width="100%" [height]="160">
         <dxi-item [ratio]="2" [baseSize]="0">
@@ -16,8 +16,12 @@
                         <!-- bloque de listado de medicamentos  -->
                         <div class="title-m" *ngFor="let data of ordenSuministro; let i = index">
                             <samp>INDICACION {{data.idNumerico}}</samp>
-                            <div class="title-d" *ngFor="let item of data.listSuministro" >
-                                <div class="spam"><span>{{item.descripcionDTO}}</span></div>
+                            <div class="title-d" *ngFor="let item of data.listSuministro ; let i = index;" 
+                            (click)="onSutmitSumitMedicine(item)">
+                                <div class="spam" (click)="whenClicked[i]=!whenClicked[i]" 
+                                [style.background-color] = "whenClicked[i] ? 'rgb(0, 152, 216)' : 'none'">
+                                    {{item.descripcionDTO }}
+                                </div>
                             </div>
                         </div>
                         <div class="line"></div>
@@ -31,7 +35,7 @@
                             <div class="main-buttons-list">
                                 <div class="item-button" data-toggle="tooltip" data-placement="bottom"
                                     title="Adiccionar" (click)="onActionClickSutmit($event)">
-                                    <div class="text-button">Adicionar</div>
+                                    <div class="text-button"> Adicionar </div>
                                 </div>
                             </div>
                         </div>

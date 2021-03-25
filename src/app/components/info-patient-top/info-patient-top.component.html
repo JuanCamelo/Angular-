@@ -1,15 +1,15 @@
-<div class="gray-container cssHeight" *ngFor="let data of patient" >
+<div class="gray-container cssHeight">
     <div class="global-container">
         <div class="basic-data">
             <div class="photo-container">
                 <div class="photo">
-                    <img [src]="data.photoPath || './assets/images/userAvatar.png'"
+                    <img [src]="patient.photoPath || './assets/images/userAvatar.png'"
                         alt="image">
                 </div>
             </div>
             <div class="title-container">
-                <span>{{data.pacienteDTO}}</span>
-                <!-- <label>{{patient.professionDTO}}</label> -->
+                <span>{{patient.nameFull}}</span>
+                <label>{{patient.professionDTO}}</label>
             </div>
         </div>
         <div class="second-container">
@@ -17,27 +17,29 @@
                 <div class="line-vertical"></div>
             </div>
 
-            <div class="info-container">                 
-                    <span>Sucursal: <label>{{data.prestadorDTO}}</label></span>                    
-                    <span>Piso: <label>{{data.instalacionPrestadorDTO}}</label></span>                    
-                    <span>Habitacion: <label>{{data.habitacioDTO}}</label></span>                     
+            <div class="info-container">
+                <span>Direccion:</span>
+                <label>{{patient.localityDTO}}</label>
+                <span>Correo:</span>
+                <label>{{patient.emailDTO}}</label>
             </div>
             <div class="container-line">
                 <div class="line-vertical"></div>
             </div>
-            <div class="info-container">                               
-                <span>Servicio: <label>{{data.servicioDTO}}</label></span>                
-                <span>Tipo documento: <label>{{data.tipoDocumentoDTO}}</label></span>                
-                <span>N° documento: <label>{{data.nDocumentoDTO}}</label> </span>                
-            </div>           
+            <div class="info-container">
+                <span>Estado Civil:</span>
+                <label>{{patient.stateCivil}}</label>
+                <span>Telefono Movil:</span>
+                <label>{{patient.numberPhone}}</label>
+            </div>
             <div class="container-line">
                 <div class="line-vertical"></div>
             </div>
-            <div class="info-container">                
-                <span>Edad:<label>{{data.edadDTO}}</label></span>                
-                <span>Diagnostico: <label>{{data.diagnosticoDTO}}</label></span>                
-                <span>Prevencion: <label>{{data.prevencionDTO}}</label></span>                
-                <span>Plan: <label>{{data.planDTO}}</label></span>
+            <div class="info-container">
+                <span>Edad:</span>
+                <label>{{patient.ageDTO}}</label>
+                <span>Telefono:</span>
+                <label>{{patient.telephoneDTO}}</label>
             </div>
         </div>
     </div>

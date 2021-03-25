@@ -7,7 +7,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { DevextremeModule } from 'src/app/components/devextreme/devextreme.module';
 import { DxBoxModule } from 'devextreme-angular';
 import { DxSelectBoxModule, DxListModule, DxTemplateModule } from 'devextreme-angular';
-
+import { PharmacyModule } from "../hoapital-pharmacy/components/pharmacy.module"
 
 const routes: Routes = [
   {
@@ -17,20 +17,21 @@ const routes: Routes = [
       {
         path: 'dispensacion/:orden',
         component: PharmacyComponent,
-      },
+      },      
       {
         path: '**',
-        redirectTo: 'dispensacion',
+        redirectTo: 'dispensacion/:orden',
         pathMatch: 'full'
       }
     ]
   },
-  { path: '**', redirectTo: '' }
+  //{ path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   declarations: [HospitalPharmacyComponent, PharmacyComponent],
   imports: [
+    PharmacyModule,
     DxBoxModule,
     ComponentsModule,
     DevextremeModule,

@@ -15,6 +15,8 @@ import { from } from 'rxjs';
   styleUrls: ['./pharmacy.component.scss']
 })
 export class PharmacyComponent implements OnInit {
+  
+  public whenClicked = [false,false];
   existPatien = false;
   public bedSelectModalVisible = false;
   public isAddForm = false;
@@ -70,11 +72,14 @@ export class PharmacyComponent implements OnInit {
           
   }
 
-  //funcion sutmit filtro
-  selectProcedure(event){
+  
+
+  //envio de insumos 
+  onSutmitSumitMedicine(e:any){
+    
   }
 
-
+ 
   ///limpiar codigo hacia abajo
 
 
