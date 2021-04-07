@@ -8,70 +8,17 @@ import { ConfigService } from 'src/app/services/config.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { ResolveRequestResultService } from 'src/app/utils/resolve-requestResult';
 
-export class datospaciente {
-  sucursal: string;
-  piso: string;
-  cama: string;
-  servicio: string;
-  tdocumento: string;
-  noDocumento: number;
-  paciente: string;
-  edad: string;
-  diagnostico: string;
-  prevension: string;
-  plan: string;
-  hospitalaria: string;
-}
-export class StatusM {
+
+export class Convenciones{
   color: string;
   descripcion: string;
 }
-export class Medicamentos {
-  id: number;
-  descripcion: string;
-  items: { descripcion: string }[]
-}
-
-
-
-
-let medicamentos =
+let convenciones =
   [
-    {
-      id: 1, descripcion: "INDICACION 307",
-      items: [
-        { descripcion: "Diclofenalco 100gr" },
-        { descripcion: "Paracetamol 400gr" },
-        { descripcion: "Ibuprofeno 800gr" },
-      ]
-    }
-
-  ]
-
-let statusM =
-  [
-    { color: "red", descripcion: "Estupefaciente" },
+    { color: "red", descripcion: "Estupefacientes" },
     { color: "#DED8DE", descripcion: "Psicotrópico" },
-    { color: "#E065E8", descripcion: "Antibiotico" }
+    { color: "#E065E8", descripcion: "Antibiótico" }
   ]
-
-let Datospaciente = [
-  {
-    sucursal: "Indilsa Chile",
-    piso: "2",
-    cama: "205",
-    servicio: "Urgencias",
-    tdocumento: "CC",
-    noDocumento: 2132545,
-    paciente: "Pedro Osorio",
-    edad: "35 años",
-    diagnostico: "Abdomen agudo",
-    prevension: "Plan medico",
-    plan: "Pleno 81",
-    hospitalaria: "Hospitalaria"
-  }
-]
-
 
 @Injectable({
   providedIn: 'root'
@@ -104,16 +51,10 @@ export class ServicePharmacyService {
         this.sharedService.showLoader(false)
         return this.resolveRequestResultService.resolve(response);
       }));
+  };  
+  
+  _getMedicamentos(): Convenciones[] {
+    return convenciones;
   }
-
-  //getlist de pruebas 
-  _getPatiente(): datospaciente[] {
-    return Datospaciente;
-  }
-  _getMedicamentos(): StatusM[] {
-    return statusM;
-  }
-  _getRMedicamento(): Medicamentos[] {
-    return medicamentos;
-  }
+  
 }

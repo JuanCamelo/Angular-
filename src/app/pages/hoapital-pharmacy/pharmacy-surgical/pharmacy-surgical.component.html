@@ -1,0 +1,53 @@
+<oph-surgical-patient [patient]="Patient"></oph-surgical-patient>
+
+<!-- bloque body farmacia-hospilataria -->
+<dx-box direction="col" width="100%" [height]="460">
+    <dxi-item [ratio]="2" [baseSize]="0">
+        <dx-box direction="row" width="100%" [height]="460">
+            <dxi-item [ratio]="1.5">
+                <!-- bloque de panel izquierdo -->
+                <div class="body-card">
+                    <h6>MEDICAMENTOS Y/O DISPOSITIVOS MEDICOS</h6>
+                    <!-- bloque de codigo convenciones -->
+                    <div class="body-item" *ngFor="let status of medicalStatus">
+                        <i class="fas fa-circle" [ngStyle]="{'color': status.color ||'black'}"></i>
+                        <span style="font-size: 12px;">{{status.descripcion || 'texto'}}</span>
+                    </div>
+                    <div class="line"></div>
+                    <!-- bloque de listado de medicamentos -->
+                    <div class="search-form">
+                        <!-- bloque de codigo body pop-pu -->
+                        <form (submit)="onSearch($event)">
+                            <dx-form showColonAfterLabel="true" labelLocation="top" minColWidth="300"
+                                [formData]="formDataRequest">
+                                <dxi-item [colSpan]="1" dataField="idInsumo" [label]="{text:'Insumos'}"
+                                    [editorOptions]="{showClearButton: true}">
+                                </dxi-item>
+                                <dxi-item [colSpan]="1" itemType="button" [buttonOptions]="{                      
+                                            text: 'Buscar',
+                                            type: 'success',
+                                            hoverStateEnabled:'true',
+                                            useSubmitBehavior: true,
+                                            width:'40%'}" horizontalAlignment="center">
+                                </dxi-item>
+                            </dx-form>
+                        </form>
+
+                        <!-- bloque de listado de medicamentos  -->
+                        <div class="search-items" *ngFor="let data of isumosList; let i = index;">
+                            <div class="search-desc" (click)="whenClicked[i]=!whenClicked[i]"
+                                [style.background-color]="whenClicked[i] ? 'rgb(0, 152, 216)' : 'none'">
+                                {{data.descripcionDTO}}
+                            </div>
+                        </div>
+                        <dxi-validation-rule type="required"></dxi-validation-rule>
+                    </div>
+                </div>
+            </dxi-item>
+            <dxi-item [ratio]="5">
+                <iframe *ngIf="imperiumUrl" [src]="imperiumUrl | urlSafe" frameborder="0"
+                    class="imperium-frame"></iframe>
+            </dxi-item>
+        </dx-box>
+    </dxi-item>
+</dx-box>

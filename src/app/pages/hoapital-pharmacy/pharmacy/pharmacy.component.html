@@ -1,52 +1,54 @@
-    <oph-patient-info  [patient]="infoPatient"></oph-patient-info>
-    <!-- bloque body farmacia-hospilataria -->
-    <dx-box direction="col" width="100%" [height]="160">
-        <dxi-item [ratio]="2" [baseSize]="0">
-            <dx-box direction="row" width="100%" [height]="160">
-                <dxi-item [ratio]="1.5">
-                    <!-- bloque de panel izquierdo -->
-                    <div class="body-card">
-                        <h6>MEDICAMENTOS Y/O DISPOSITIVOS MEDICOS</h6>
-                        <!-- bloque de codigo convenciones -->
-                        <div class="body-item" *ngFor="let status of medicalStatus">
-                            <i class="fas fa-circle" [ngStyle]="{'color': status.color ||'black'}"></i>
-                            <span style="font-size: 12px;">{{status.descripcion || 'texto'}}</span>
-                        </div>
-                        <div class="line"></div>
-                        <!-- bloque de listado de medicamentos  -->
-                        <div class="title-m" *ngFor="let data of ordenSuministro; let i = index">
-                            <samp>INDICACION {{data.idNumerico}}</samp>
-                            <div class="title-d" *ngFor="let item of data.listSuministro ; let i = index;" 
+<oph-patient-info [patient]="infoPatient"></oph-patient-info>
+<!-- bloque body farmacia-hospilataria -->
+<dx-box direction="col" width="100%" [height]="460">
+    <dxi-item [ratio]="2" [baseSize]="0">
+        <dx-box direction="row" width="100%" [height]="460">
+            <dxi-item [ratio]="1.5">
+                <!-- bloque de panel izquierdo -->
+                <div class="body-card">
+                    <h6>MEDICAMENTOS Y/O DISPOSITIVOS MEDICOS</h6>
+                    <!-- bloque de codigo convenciones -->
+                    <div class="body-item" *ngFor="let status of medicalStatus">
+                        <i class="fas fa-circle" [ngStyle]="{'color': status.color ||'black'}"></i>
+                        <span style="font-size: 12px;">{{status.descripcion || 'texto'}}</span>
+                    </div>
+                    <div class="line"></div>
+                    <!-- bloque de listado de medicamentos  -->
+                    <div class="title-m" *ngFor="let data of ordenSuministro; let i = index">
+                        <samp>INDICACION {{data.idNumerico}}</samp>
+                        <div class="title-d" *ngFor="let item of data.listSuministro ; let i = index;"
                             (click)="onSutmitSumitMedicine(item)">
-                                <div class="spam" (click)="whenClicked[i]=!whenClicked[i]" 
-                                [style.background-color] = "whenClicked[i] ? 'rgb(0, 152, 216)' : 'none'">
-                                    {{item.descripcionDTO }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <!-- bloque de Insumos adicionales -->
-                        <div class="body-add">
-                            <i class="fas fa-edit" (click)="onActionAddform(isAddForm)"></i>
-                            <h5>INSUMOS ADICIONALES </h5>
-                        </div>
-                        <!-- bloque de codigo boton adicionar -->
-                        <div class="grid-content">
-                            <div class="main-buttons-list">
-                                <div class="item-button" data-toggle="tooltip" data-placement="bottom"
-                                    title="Adiccionar" (click)="onActionClickSutmit($event)">
-                                    <div class="text-button"> Adicionar </div>
-                                </div>
+                            <div class="spam" (click)="whenClicked[i]=!whenClicked[i]"
+                                [style.background-color]="whenClicked[i] ? 'rgb(0, 152, 216)' : 'none'">
+                                {{item.descripcionDTO }}
                             </div>
                         </div>
                     </div>
-                </dxi-item>
-                <dxi-item [ratio]="5">
-                    <!-- componentes panel panel derecho  -->
-                </dxi-item>
-            </dx-box>
-        </dxi-item>
-    </dx-box>
+                    <div class="line"></div>
+                    <!-- bloque de Insumos adicionales -->
+                    <div class="body-add">
+                        <i class="fas fa-edit" ></i>
+                        <h5>INSUMOS ADICIONALES </h5>
+                    </div>
+                    <!-- bloque de codigo boton adicionar -->
+                    <div class="grid-content">
+                        <div class="main-buttons-list">
+                            <div class="item-button" data-toggle="tooltip" data-placement="bottom" title="Adiccionar"
+                                (click)="onActionClickSutmit($event)">
+                                <div class="text-button"> Adicionar </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </dxi-item>
+            <dxi-item [ratio]="5">
+                <!-- componentes panel panel derecho  -->
+                <iframe *ngIf="imperiumUrl" [src]="imperiumUrl | urlSafe" frameborder="0"
+                    class="imperium-frame"></iframe>
+            </dxi-item>
+        </dx-box>
+    </dxi-item>
+</dx-box>
 
 
 <!--bloque de codigo del pop-pu -->
@@ -54,37 +56,38 @@
     [closeOnOutsideClick]="true" [(visible)]="bedSelectModalVisible">
     <div>
         <!-- bloque de codigo body pop-pu -->
-        <form (submit)="onAddIsumoFormSubmit($event)">            
-            <dx-form showColonAfterLabel="true" labelLocation="top" minColWidth="300" [formData]="formDataRequest" 
-            >
-                 <dxi-item itemType="group" alignment="bottom" [colCount]="4">
-                     
+        <form (submit)="onAddIsumoFormSubmit($event)">
+            <dx-form showColonAfterLabel="true" labelLocation="top" minColWidth="300" [formData]="formDataRequest">
+                <dxi-item itemType="group" alignment="bottom" [colCount]="4">
+
                     <dxi-item [colSpan]="3" [label]="{text:'Insumos'}">
-                        <dx-select-box #selectboxSearch dataField="idInsumo" [dataSource]="isumosList" displayExpr="descripcionDTO" valueExpr="idDTO" searchEnabled="true" placeholder="Escriba al menos 3 letras para filtrar..." (onKeyUp)="onFilterKeyDownV2($event)" [showClearButton]="true">
-                            <div *ngFor="let data of isumosList"> 
+                        <dx-select-box #selectboxSearch dataField="idInsumo" [dataSource]="isumosList"
+                            displayExpr="descripcionDTO" valueExpr="idDTO" searchEnabled="true"
+                            placeholder="Escriba al menos 3 letras para filtrar..."
+                            (onKeyUp)="onFilterKeyDownV2($event)" [showClearButton]="true">
+                            <div *ngFor="let data of isumosList">
                                 {{data.descripcionDTO}}
                             </div>
                             <dxi-validation-rule type="required"></dxi-validation-rule>
                         </dx-select-box>
-                    </dxi-item>   
+                    </dxi-item>
                     <dxi-item [colSpan]="1" dataField="cantidad" [label]="{text:'Cantidad'}">
                         <dxi-validation-rule type="required"></dxi-validation-rule>
                     </dxi-item>
                 </dxi-item>
-                <dxi-item editorType="dxTextArea" [height]="300" [label]="{ text: 'Observaciónes' }" dataField="descripcion"
-                    [editorOptions]="{ }">
-                </dxi-item>                
+                <dxi-item editorType="dxTextArea" [height]="300" [label]="{ text: 'Observaciónes' }"
+                    dataField="descripcion" [editorOptions]="{ }">
+                </dxi-item>
                 <dxi-item [colSpan]="1" itemType="button" [buttonOptions]="{                      
                         text: 'Agregar',
                         type: 'success',
                         hoverStateEnabled:'true',
                         alignment: 'right',
                         useSubmitBehavior: true,
-                        width:'30%'}" 
-                        verticalAlignment="bottom">
-                </dxi-item> 
-                
-                
+                        width:'30%'}" verticalAlignment="bottom">
+                </dxi-item>
+
+
             </dx-form>
         </form>
     </div>

@@ -9,4 +9,6 @@ export class Config {
   imperiumParamsDash1: string;
   imperiumParamsDash3: string;
   urlAppointmentScheduler: string;
+  urlApoloFarmacia:string;
+  urlApoloFarmaciaSurgical:string;
 }

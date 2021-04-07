@@ -5,5 +5,8 @@
     "urlSSBApi": "https://factorydev.digitalwaresaas.com.co:8085/AgoraApi/api",
     "urlRedirectLogin": "https://bitest.digitalwaresaas.com.co:9595/portalv2/#/auth?url=$navigateTo",
     "urlAppointmentScheduler": "https://factorydev.digitalwaresaas.com.co:8085/Schedule/#/calendario",
-    "apoloParams": "&templateCode=PLA_PACIENTE&version=7&mode=new&navigateTo=form-visualization"
+    "apoloParams": "&templateCode=PLA_PACIENTE&version=7&mode=new&navigateTo=form-visualization",
+    "urlApoloFarmacia":"&navigateTo=form-visualization&templateCode=PLA_PUBLICA_AGENDA&version=8&mode=new&showBackButton=false&showToolbar=false",
+    "urlApoloFarmaciaSurgical":"&navigateTo=form-visualization&templateCode=PLA_DESPACHO_QUIRURGICO&version=1&mode=new&showBackButton=false&showToolbar=false"
+
 }

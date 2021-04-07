@@ -32,14 +32,13 @@ import { ComponentsModule } from './components/components.module';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
     IndexPageComponent,
     LoaderComponent,
     IndexPageComponent,
-    RedirectExternalPageComponent    
+    RedirectExternalPageComponent  
   ],
   imports: [
     BrowserModule,

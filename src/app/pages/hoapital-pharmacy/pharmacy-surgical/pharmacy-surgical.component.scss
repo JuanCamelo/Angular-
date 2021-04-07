@@ -1,0 +1,58 @@
+h5{
+    font-weight: 700;   
+    font-size: 0.85rem;
+    text-align: right;
+    margin-right: 3em;
+    margin-top: 1em;
+} 
+
+
+ .body-card{
+   height: -webkit-fill-available;
+   margin-top: -1.5em;
+   border: 1px solid #838485;
+   border-radius: 14px;
+   .search-form{
+       margin: 2em;
+   }
+   h6{
+       font-weight: 700;   
+       font-size: 0.75rem;
+       text-align: center;
+       padding: 1em;   
+   } 
+ }
+  
+ .search-items{
+   margin-top: 2em;
+     .search-desc{
+         padding: 0.5rem;
+     }
+    :hover{
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        background-color:rgb(0, 152, 216);
+    } 
+ } 
+
+ //estilos de separador 
+ .line{
+   border-bottom: 1px solid #838485;   
+   margin-top: 1.5em; 
+   margin-bottom: 1em;
+   margin-left: 1em;
+   margin-right: 1em;
+ }
+
+
+ //estilos convencioness
+ .body-item{
+    display: contents; 
+    font-size: 0.58em;
+    margin-top: 1em;      
+    i{
+      margin-left: 1em;
+      margin-right: 0.5em;
+      margin-bottom: 2em;
+    }     
+}

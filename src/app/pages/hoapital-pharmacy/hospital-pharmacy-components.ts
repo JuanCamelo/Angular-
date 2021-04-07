@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HospitalPharmacyComponent implements OnInit {
   routesList = [    
-    { name: 'Dispensación', path: 'dispensacion', icon: '' }   
-    
+    { name: 'Dispensación', path: 'dispensacion', icon: '' },
+    { name: 'Farmacia Quirúigica', path: 'surgical-pharmacy/procedimiento', icon: '' }  
   ]
 
   constructor(
