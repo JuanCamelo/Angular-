@@ -30,6 +30,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { PatientInfoEffect } from './store/effects/patient-info.effect';
 import { ComponentsModule } from './components/components.module';
 
+import { PersonalInformationcComponent } from './pages/personal-informationc/personal-informationc.component';
+
+
 
 
 @NgModule({
@@ -38,7 +41,7 @@ import { ComponentsModule } from './components/components.module';
     IndexPageComponent,
     LoaderComponent,
     IndexPageComponent,
-    RedirectExternalPageComponent  
+    RedirectExternalPageComponent
   ],
   imports: [
     BrowserModule,

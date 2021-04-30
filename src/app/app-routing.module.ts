@@ -4,34 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 // import { SessionGuardService } from './services/session-guard.service';
 import { RedirectExternalPageComponent } from './pages/redirect-external-page/redirect-external-page.component';
 
-const routes: Routes = [
+const routes: Routes = [  
+  {
+    path: 'user',
+    loadChildren: () => import('./pages/personal-informationc/personal-informationc.module').then(m => m.PersonalInformationcModule)
+  },
   // {
-  //   path: 'patient-identity',
-  //   loadChildren: () => import('./pages/patient-identity-validation/patient-identity-validation.module').then(m => m.PatientIdentityValidationModule)
+  //   path: 'redirect-external',
+  //   component: RedirectExternalPageComponent
   // },
   {
-    path: 'appointment-management',
-    loadChildren: () => import('./pages/appointment-management/appointment-management.module').then(m => m.AppointmentManagementModule)
-  },
-  {
-    path: 'infirmary',
-    loadChildren: () => import('./pages/infirmary/infirmary.module').then(m => m.InfirmaryModule)
-  },
-  {
-    path: 'farmacia-hospitalaria',
-    loadChildren: () => import('./pages/hoapital-pharmacy/hoapital-pharmacy.module').then(x => x.HoapitalPharmacyModule)
-  },
-  {
-    path: 'egreso',
-    loadChildren: () => import('./pages/infirmary-egress/infirmary-egress.module').then(m => m.InfirmaryEgressModule)
-  },
-  {
-    path: 'redirect-external',
-    component: RedirectExternalPageComponent
-  },
-  {
     path: '**',
-    redirectTo: 'infirmary'
+    redirectTo: 'user'
   }
 ];
 

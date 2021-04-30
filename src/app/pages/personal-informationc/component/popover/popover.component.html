@@ -1,0 +1,30 @@
+<!-- <dx-popover 
+    position="top" 
+    [width]="160"
+    [(visible)]="popoverVisible">
+    <div *dxTemplate="let data of 'content'">        
+            <dx-form  labelLocation="top" [colCount]="1">
+                <dxi-item dataField="value" [label]="{ text: 'Dosis' }" ></dxi-item>
+            </dx-form>        
+    </div>
+</dx-popover> -->
+<dx-popover 
+                [target]="popoverTarget" 
+                position="top"
+                [width]="300" 
+                [(visible)]="popoverVisible">
+                
+                <div *dxTemplate="let data  of 'content'">
+                    <dx-form
+                    (onFieldDataChanged)="onActionClickPrest($event)"
+                     [formData]="formRequest" labelLocation="top" [colCount]="1">
+                        <dxi-item dataField="value" [label]="{ text: 'Dosis' }" ></dxi-item>
+                    </dx-form> 
+                   
+                </div>
+            </dx-popover>
+<!-- <input
+type="text"
+[(ngModel)]="celda.valor"
+(blur)="celda.editar = false"
+/> -->

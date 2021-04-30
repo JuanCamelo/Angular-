@@ -1,0 +1,126 @@
+<div class="main-content">
+	
+</div>
+	
+	
+
+
+
+
+<!-- pop-pu anestesia local -->
+<dx-popup [width]="580" [height]="580" [showTitle]="false" [dragEnabled]="false" [closeOnOutsideClick]="false"
+	[(visible)]="bedSelectModalVisibleCreate">
+	<!-- formulario   -->
+	<dx-form id="form" [formData]="FormRequests" labelLocation="top">
+		<dxi-item itemType="group" [colCount]="2">
+			<dxi-item itemType="group">
+				<dxi-item [colSpan]="2" horizontalAlignment="right" verticalAlignment="bottom">
+					<div *dxTemplate>
+
+
+
+						<div class="widget-container flex-box">
+							<div
+								id="dropzone-external"
+								class="flex-box"
+								[ngClass]="isDropZoneActive ? ['dx-theme-accent-as-border-color', 'dropzone-active'] : ['dx-theme-border-color']"
+							>
+								<img
+									id="dropzone-image"
+									[src]="imageSource"
+									*ngIf="imageSource"
+									alt=""
+								/>
+								<div
+									id="dropzone-text"
+									class="flex-box"
+									*ngIf="textVisible"
+								>
+									
+								</div>
+								<dx-progress-bar
+									#uploadProgress
+									[min]="0"
+									[max]="100"
+									width="30%"
+									[showStatus]="false"
+									[visible]="progressVisible"
+									[value]="progressValue"
+								></dx-progress-bar>
+							</div>
+							<dx-file-uploader
+							dialogTrigger="#dropzone"
+							selectButtonText="Subir imagen"
+							dropZone="#dropzone-externalsa"
+							[multiple]="false"
+							[allowedFileExtensions]="['.jpg', '.jpeg', '.gif', '.png']"
+							uploadMode="instantly"
+							uploadUrl="https://js.devexpress.com/Demos/NetCore/FileUploader/Upload"
+							[visible]="true"
+							(onDropZoneEnter)="onDropZoneEnter($event)"
+							(onDropZoneLeave)="onDropZoneLeave($event)"
+							(onUploaded)="onUploaded($event)"
+							(onProgress)="onProgress($event)"
+							(onUploadStarted)="onUploadStarted($event)"
+						></dx-file-uploader>
+
+
+
+
+						<!-- <dx-file-uploader labelText="" [multiple]="false" accept="*" uploadMode="instantly"
+						dialogTrigger="#dropzone-external"
+						selectButtonText="Subir imagen o archivo" #fileUploader
+						(onDropZoneEnter)="onDropZoneEnter($event)"
+							(onDropZoneLeave)="onDropZoneLeave($event)"
+							(onUploaded)="onUploaded($event)"
+							(onProgress)="onProgress($event)"
+							(onUploadStarted)="onUploadStarted($event)"
+						uploadUrl="https://js.devexpress.com/Demos/NetCore/FileUploader/Upload">
+					  </dx-file-uploader> -->
+						</div>
+
+
+
+			  
+					  
+			  
+					  <!-- <dx-button icon="upload" stylingMode="contained" type="default" (onClick)="limpiar()">
+					</dx-button> -->
+					</div>
+				  </dxi-item>	
+			</dxi-item>
+			<dxi-item itemType="group">
+				<dxi-item dataField="tipoDoc" [label]="{text:'tipo Doc'}" editorType="dxSelectBox">
+					<dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+				</dxi-item>
+				<dxi-item dataField="numeroDocumeto" [label]="{text:'N° documento'}">
+					<dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+				</dxi-item>
+				<dxi-item dataField="fechaNacimiento" [label]="{text:'Fecha nacimiento'}">
+					<dxi-validation-rule type="required" message="Campo requerido"></dxi-validation-rule>
+				</dxi-item>
+			</dxi-item>
+		</dxi-item>
+		<dxi-item itemType="group" [colCount]="2">
+			<dxi-item itemType="group">
+				<dxi-item dataField="primerNombre" [label]="{text:'Primer nombre'}"></dxi-item>
+				<dxi-item dataField="segundoNombre" [label]="{text:'segundo Nombre'}"></dxi-item>
+				<dxi-item dataField="primerApellido" [label]="{text:'Primer Apellido'}"></dxi-item>
+				<dxi-item dataField="segundoApellido" [label]="{text:'Segundo Apellido'}"></dxi-item>
+			</dxi-item>
+			<dxi-item itemType="group">
+				<dxi-item dataField="correElectronico" [label]="{text:'Correo electronico'}"></dxi-item>
+				<dxi-item dataField="pais" [label]="{text:'Pais'}"></dxi-item>
+				<dxi-item dataField="departamento" [label]="{text:'Departamento'}"></dxi-item>
+				<dxi-item dataField="cuidad" [label]="{text:'Cuidad'}"></dxi-item>
+			</dxi-item>
+		</dxi-item>
+
+		<dxi-item itemType="button" [buttonOptions]="{ text: 'Agregar', type: 'success', seSubmitBehavior: true}"
+			horizontalAlignment="center" verticalAlignment="bottom">
+		</dxi-item>
+	</dx-form>
+
+
+
+</dx-popup>

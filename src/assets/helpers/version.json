@@ -1,7 +1,7 @@
 [{
     "version": "v1.0.0",
     "date": "Dic 28, 2020",
-    "release": "A continuación se enumerarán todos los bugs corregidos y nuevas característica incluidas:",
+    "release": "A continuación se enumeran nuevas característica incluidas:",
     "newfeature": [
         "Se muestra el tiempo de las Juntas Médicas basado en la duración del procedimiento.",
         "Al reprogramar una cita se cancela con motivo: 'Reprogramada' y se crea una con los nuevos valores.",

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import {
+  DxBoxModule, DxPopoverModule,
+  DxProgressBarModule,
+  DxFileUploaderModule, 
   DxPopupModule,
   DxDataGridModule,
   DxFormModule,
@@ -45,6 +48,9 @@ import {
   declarations: [],
   imports: [
     // CommonModule
+    
+    DxBoxModule, DxPopoverModule,
+    DxFileUploaderModule,
     DxPopupModule,
     DxDataGridModule,
     DxFormModule,
@@ -74,6 +80,7 @@ import {
     // DxResponsiveBoxModule,
     // DxMenuModule,
     // DxColorBoxModule,
+    DxProgressBarModule,
     DxRadioGroupModule,
     DxContextMenuModule,
     DxButtonGroupModule,
@@ -81,7 +88,10 @@ import {
     DxSliderModule,
     DxGalleryModule
   ],
-  exports: [
+  exports: [   
+    DxBoxModule, DxPopoverModule,
+    DxProgressBarModule,
+    DxFileUploaderModule,
     DxPopupModule,
     DxDataGridModule,
     DxFormModule,
